@@ -2,7 +2,7 @@
 #include<sys/attribs.h>  // __ISR macro
 
 // DEVCFG0
-#pragma config DEBUG = 0b11 // no debugging
+#pragma config DEBUG = O // no debugging
 #pragma config JTAGEN = 0 // no jtag
 #pragma config ICESEL = 0b11 // use PGED1 and PGEC1
 #pragma config PWP = OFF // no write protect
@@ -61,13 +61,11 @@ int main() {
     __builtin_enable_interrupts();
 
     while(1) {
-	// use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
-        _CP0_SET_COUNT(0);
-        LATAbits.LATA4 = !LATAbits.LATA4;
-        while(_CP0_GET_COUNT() < 11999) { ; }
+        _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
+        LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
+        while(_CP0_GET_COUNT() < 11999) { ; }       // Toggle it ON or OFF for 0.5 ms
         
-        while(!PORTBbits.RB4) { 
+        while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
             LATAbits.LATA4 = 0; }
-	// remember the core timer runs at half the sysclk
     }
 }
