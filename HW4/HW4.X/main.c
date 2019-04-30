@@ -36,6 +36,15 @@
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
+#define CS LATBbits.LATB7
+
+unsigned char spi_io(unsigned char o) {
+  SPI4BUF = o;
+  while(!SPI4STATbits.SPIRBF) { // wait to receive the byte
+    ;
+  }
+  return SPI4BUF;
+}
 
 int main() {
 
