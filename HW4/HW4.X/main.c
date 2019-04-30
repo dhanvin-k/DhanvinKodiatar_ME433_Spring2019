@@ -38,20 +38,30 @@
 
 #define CS LATBbits.LATB7
 
+void setVoltage(char, unsigned short)
+
 void init_spi() {
     CS = 1;
     TRISBbits.TRISB7 = 0;
     RPB7Rbits.RPB7R = 0b0011;
     TRISBbits.TRISB8 = 0;
     RPB8Rbits.RPB8R = 0b0011;
+    
+    SPI1CON = 0;
+    SPI1BUF;                  // clear the rx buffer by reading from it
+    SPI1BRG = 0x1;            // baud rate to 10 MHz [SPI4BRG = (48000000/(2*desired))-1]
+    SPI1STATbits.SPIROV = 0;  // clear the overflow bit
+    SPI1CONbits.CKE = 1;      // data changes when clock goes from hi to lo (since CKP is 0)
+    SPI1CONbits.MSTEN = 1;    // master operation
+    SPI1CONbits.ON = 1;       // turn on spi 1
 }
 
 unsigned char spi_io(unsigned char o) {
   SPI4BUF = o;
-  while(!SPI4STATbits.SPIRBF) { // wait to receive the byte
+  while(!SPI1STATbits.SPIRBF) { // wait to receive the byte
     ;
   }
-  return SPI4BUF;
+  return SPI1BUF;
 }
 
 int main() {
@@ -81,10 +91,22 @@ int main() {
 
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
-        LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
-        while(_CP0_GET_COUNT() < 11999) { ; }       // Toggle it ON or OFF for 0.5 ms
-        
-        while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
-            LATAbits.LATA4 = 0; }
+        float sine = 512 +512*sin(i*2*3.1415/1000*10);
+        i++;
+        setVoltage(0, sine);
+        while(_CPO_GET_COUNT() < 2400000000/1000) {}  //check this is 24Million
     }
+    return 0;
+}
+
+void setVoltage(char a, unsigned short v) {
+	unsigned short t = 0;
+	t= a << 15; //a is at the very end of the data transfer
+	t = t | 0b01110000000000000;
+	t = t | ((v&0b1111111111) <<2); //rejecting excessive bits (above 10)
+	
+	CS = 0;
+	spi_io(t>>8);
+	spi_io(t<<8);
+    CS = 1;
 }
