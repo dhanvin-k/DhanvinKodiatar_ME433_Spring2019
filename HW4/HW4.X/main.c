@@ -38,6 +38,14 @@
 
 #define CS LATBbits.LATB7
 
+void init_spi() {
+    CS = 1;
+    TRISBbits.TRISB7 = 0;
+    RPB7Rbits.RPB7R = 0b0011;
+    TRISBbits.TRISB8 = 0;
+    RPB8Rbits.RPB8R = 0b0011;
+}
+
 unsigned char spi_io(unsigned char o) {
   SPI4BUF = o;
   while(!SPI4STATbits.SPIRBF) { // wait to receive the byte
@@ -68,6 +76,8 @@ int main() {
     LATAbits.LATA4 = 1;
 
     __builtin_enable_interrupts();
+    
+    init_spi();
 
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
