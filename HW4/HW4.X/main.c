@@ -1,5 +1,9 @@
 #include<xc.h>           // processor SFR definitions
 #include<sys/attribs.h>  // __ISR macro
+#include<math.h>
+#include<string.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
@@ -38,7 +42,7 @@
 
 #define CS LATBbits.LATB7
 
-void setVoltage(char, unsigned short)
+void setVoltage(char, unsigned short);
 
 void init_spi() {
     CS = 1;
@@ -57,7 +61,7 @@ void init_spi() {
 }
 
 unsigned char spi_io(unsigned char o) {
-  SPI4BUF = o;
+  SPI1BUF = o;
   while(!SPI1STATbits.SPIRBF) { // wait to receive the byte
     ;
   }
@@ -88,13 +92,14 @@ int main() {
     __builtin_enable_interrupts();
     
     init_spi();
-
+    int i = 0;
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
-        float sine = 512 +512*sin(i*2*3.1415/1000*10);
+        //float sine = (1023/2.0)*(1 + sin(i*2*3.1415*10));
+        float sine = 512 + 512*sin(i*2*3.1415/1000*10);
         i++;
         setVoltage(0, sine);
-        while(_CPO_GET_COUNT() < 2400000000/1000) {}  //check this is 24Million
+        while(_CP0_GET_COUNT() < 24000) {}  //check this is 24Million
     }
     return 0;
 }
@@ -102,11 +107,13 @@ int main() {
 void setVoltage(char a, unsigned short v) {
 	unsigned short t = 0;
 	t= a << 15; //a is at the very end of the data transfer
-	t = t | 0b01110000000000000;
+	t = t | 0b0111000000000000;
 	t = t | ((v&0b1111111111) <<2); //rejecting excessive bits (above 10)
 	
 	CS = 0;
 	spi_io(t>>8);
-	spi_io(t<<8);
+	spi_io(t);
+    //spi_io(0b01111111);
+    //spi_io(0b11111111);
     CS = 1;
 }
