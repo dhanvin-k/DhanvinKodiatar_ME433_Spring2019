@@ -92,11 +92,24 @@ int main() {
     __builtin_enable_interrupts();
     
     init_spi();
-    int i = 0;
+    int i = 0, x = 0, slope = 0, m = 10.23;
+    
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
-        //float sine = (1023/2.0)*(1 + sin(i*2*3.1415*10));
-        float sine = 512 + 512*sin(i*2*3.1415/1000*10);
+        float triangle = slope*m*x;
+        x++;
+        setVoltage(1, triangle);
+        if(x<=100) {
+            slope = 1;
+        }
+        else if(x<=200) {
+            slope = -1;
+        }
+        else {
+            x = 0;
+        }
+        
+        float sine = 512 + 512 * sin(i*2*3.1415/1000*10);
         i++;
         setVoltage(0, sine);
         while(_CP0_GET_COUNT() < 24000) {}  //check this is 24Million
@@ -113,7 +126,5 @@ void setVoltage(char a, unsigned short v) {
 	CS = 0;
 	spi_io(t>>8);
 	spi_io(t);
-    //spi_io(0b01111111);
-    //spi_io(0b11111111);
     CS = 1;
 }
