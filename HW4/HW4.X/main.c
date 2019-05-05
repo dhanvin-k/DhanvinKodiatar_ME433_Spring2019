@@ -92,7 +92,8 @@ int main() {
     __builtin_enable_interrupts();
     
     init_spi();
-    int i = 0, x = 0, slope = 0, m = 10.23;
+    int i = 0, x = 0, slope = 0;
+    float m = 10.23;
     
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
