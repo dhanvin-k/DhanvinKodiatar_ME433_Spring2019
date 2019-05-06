@@ -113,7 +113,7 @@ int main() {
         float sine = 512 + 512 * sin(i*2*3.1415/1000*10);
         i++;
         setVoltage(0, sine);
-        while(_CP0_GET_COUNT() < 24000) {}  //check this is 24Million
+        while(_CP0_GET_COUNT() < 24000) {}  // wait 1000 times a second
     }
     return 0;
 }
