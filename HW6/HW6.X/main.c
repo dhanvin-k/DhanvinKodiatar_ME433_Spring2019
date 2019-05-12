@@ -2,6 +2,7 @@
 #include<sys/attribs.h>  // __ISR macro
 #include "ili9341.h"
 #include<string.h>
+#include<stdio.h>
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
@@ -66,15 +67,37 @@ int main() {
     __builtin_enable_interrupts();
     
     LCD_clearScreen(ILI9341_BLACK);
-    print_char(28, 32, 'Z');
-    char message[20];
-    /*    
+    char message[20], number[3], huns, tens, ones;
+    int a = 0, b = 0, c = 0, k = 0;
+    sprintf(message, "Hello world");
+    int index = 0;
+    while(message[index]) {
+        print_char(28 + 5*index, 32, message[index]);
+        index++;
+    }
     while(1) {
-        _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
-        LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
-        while(_CP0_GET_COUNT() < 11999) { ; }       // Toggle it ON or OFF for 0.5 ms
         
-        while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
-            LATAbits.LATA4 = 0; }
-    }*/
+        clear_space(28 + 5*12, 32, 113);
+        sprintf(number, "%d%d%d", a, b, c);
+        while(number[k]) {
+            print_char(28 + 5*(12+k), 32, number[k]);
+            k++;
+        }
+        print_char(28 + 5*(12+k), 32, '!');
+        k = 0;
+        if(a == 1){
+            a=0;b=0;c=0;
+        }
+        c++;
+        if(c==10){
+            b++;
+            c=0;
+        }
+        if(b==10){
+            a++;
+            b=0;
+        }
+        _CP0_SET_COUNT(0);
+        while(_CP0_GET_COUNT()<2400000) {;}
+    }
 }

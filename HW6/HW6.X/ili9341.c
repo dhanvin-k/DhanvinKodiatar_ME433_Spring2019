@@ -269,8 +269,18 @@ void print_char(unsigned short x, unsigned short y, char ch) {
         sh = ASCII[ch-32][i];
         for (j = 0; j<8; j++) {
             if ((sh>>j) & (0b00000001) == 1) {
-                LCD_drawPixel(x + i, y + j, ILI9341_RED);
+                LCD_drawPixel(x + i, y + j, ILI9341_GREEN);
             }
         }
+    }
+}
+
+void clear_space(unsigned short x, unsigned y, unsigned short end) {
+    int i;
+    while(x<=end)  {
+        for(i = 0; i<=8; i++) {
+            LCD_drawPixel(x, y + i, ILI9341_BLACK);
+        }
+        x++;
     }
 }
