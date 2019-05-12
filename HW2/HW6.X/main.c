@@ -64,7 +64,10 @@ int main() {
     
     __builtin_enable_interrupts();
     
-    LCD_clearScreen(ILI9341_WHITE);
+    LCD_clearScreen(ILI9341_BLACK);
+    //LCD_drawPixel(5, 5, ILI9341_RED);
+    print_char(10, 10, 'B');
+    
     /*    
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0

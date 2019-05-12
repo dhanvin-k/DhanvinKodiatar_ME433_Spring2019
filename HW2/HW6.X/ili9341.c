@@ -261,3 +261,16 @@ void LCD_clearScreen(unsigned short color) {
     
     CS = 1; // CS
 }
+
+void print_char(unsigned short x, unsigned short y, char ch) {
+    int i, j;
+    char sh;
+    for (i = 0; i<5; i++) {
+        sh = ASCII[ch-32][i];
+        for (j = 0; j<8; j++) {
+            if ((sh>>j) & (0b00000001) == 1) {
+                LCD_drawPixel(x + i, y + j, ILI9341_RED);
+            }
+        }
+    }
+}

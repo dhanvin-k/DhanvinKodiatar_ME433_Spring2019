@@ -203,5 +203,6 @@ void LCD_data16(unsigned short dat);
 void LCD_setAddr(unsigned short x, unsigned short y, unsigned short w, unsigned short h);
 void LCD_drawPixel(unsigned short x, unsigned short y, unsigned short color);
 void LCD_clearScreen(unsigned short color);
+void print_char(unsigned short, unsigned short, char);
 
 #endif
