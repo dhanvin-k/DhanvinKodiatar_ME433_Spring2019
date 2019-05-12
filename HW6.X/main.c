@@ -1,6 +1,7 @@
 #include<xc.h>           // processor SFR definitions
 #include<sys/attribs.h>  // __ISR macro
 #include "ili9341.h"
+#include<string.h>
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
@@ -65,9 +66,8 @@ int main() {
     __builtin_enable_interrupts();
     
     LCD_clearScreen(ILI9341_BLACK);
-    //LCD_drawPixel(5, 5, ILI9341_RED);
-    print_char(10, 10, 'B');
-    
+    print_char(28, 32, 'Z');
+    char message[20];
     /*    
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
