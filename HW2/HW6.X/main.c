@@ -58,9 +58,14 @@ int main() {
     TRISBbits.TRISB4 = 1;
     TRISAbits.TRISA4 = 0;
     LATAbits.LATA4 = 1;
-
+    
+    SPI1_init();
+    LCD_init();
+    
     __builtin_enable_interrupts();
-
+    
+    LCD_clearScreen(ILI9341_WHITE);
+    /*    
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
         LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
@@ -68,5 +73,5 @@ int main() {
         
         while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
             LATAbits.LATA4 = 0; }
-    }
+    }*/
 }

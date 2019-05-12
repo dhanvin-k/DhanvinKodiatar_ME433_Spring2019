@@ -189,7 +189,7 @@ void SPI1_init() {
   RPA1Rbits.RPA1R = 0b0011; // A1 is SDO1
   TRISBbits.TRISB7 = 0; // CS is B7
   CS = 1; // CS starts high
-
+  
   // DC pin
   TRISBbits.TRISB15 = 0;
   DC = 1;
