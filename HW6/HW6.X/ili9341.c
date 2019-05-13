@@ -284,3 +284,10 @@ void clear_space(unsigned short x, unsigned y, unsigned short end) {
         x++;
     }
 }
+
+void draw_progress(int count) {
+    int i;
+    for(i = 0; i<=8; i++) {
+        LCD_drawPixel(28 + count, 50 + i, ILI9341_GREEN);
+    }
+}

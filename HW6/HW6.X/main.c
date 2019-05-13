@@ -1,8 +1,8 @@
 #include<xc.h>           // processor SFR definitions
 #include<sys/attribs.h>  // __ISR macro
-#include "ili9341.h"
 #include<string.h>
 #include<stdio.h>
+#include "ili9341.h"
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
@@ -66,29 +66,33 @@ int main() {
     
     __builtin_enable_interrupts();
     
-    LCD_clearScreen(ILI9341_BLACK);
+    LCD_clearScreen(ILI9341_MAROON);
     char message[20], number[3], huns, tens, ones;
     int a = 0, b = 0, c = 0, k = 0;
     sprintf(message, "Hello world");
-    int index = 0;
+    int index = 0, count = 0;
     while(message[index]) {
         print_char(28 + 5*index, 32, message[index]);
         index++;
     }
     while(1) {
         
-        clear_space(28 + 5*12, 32, 113);
+        clear_space(28 + 5*12, 32, 108);
         sprintf(number, "%d%d%d", a, b, c);
         while(number[k]) {
             print_char(28 + 5*(12+k), 32, number[k]);
             k++;
         }
         print_char(28 + 5*(12+k), 32, '!');
+        draw_progress(count);
         k = 0;
+        c++;
+        count++;
         if(a == 1){
             a=0;b=0;c=0;
+            clear_space(28, 50, 28 + count);
+            count = 0;
         }
-        c++;
         if(c==10){
             b++;
             c=0;
