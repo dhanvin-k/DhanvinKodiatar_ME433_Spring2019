@@ -67,41 +67,65 @@ int main() {
     __builtin_enable_interrupts();
     
     LCD_clearScreen(ILI9341_MAROON);
-    char message[20], number[3], huns, tens, ones;
-    int a = 0, b = 0, c = 0, k = 0;
+    char message[20], fps_message[10], number[3], huns, tens, ones;
+    int a = 0, b = 0, c = 0, k = 0, m = 0, index = 0, count = 0;
+    
     sprintf(message, "Hello world");
-    int index = 0, count = 0;
+    sprintf(fps_message, "FPS: ");
+    
     while(message[index]) {
         print_char(28 + 5*index, 32, message[index]);
         index++;
     }
+    
+    index = 0;
+    while(fps_message[index]) {
+        print_char(28 + 5*index, 80, fps_message[index]);
+        index++;
+    }
+    
     while(1) {
+        _CP0_SET_COUNT(0);
         
         clear_space(28 + 5*12, 32, 108);
         sprintf(number, "%d%d%d", a, b, c);
+        
         while(number[k]) {
             print_char(28 + 5*(12+k), 32, number[k]);
             k++;
         }
+        
         print_char(28 + 5*(12+k), 32, '!');
         draw_progress(count);
         k = 0;
         c++;
         count++;
+        
         if(a == 1){
             a=0;b=0;c=0;
             clear_space(28, 50, 28 + count);
             count = 0;
         }
+        
         if(c==10){
             b++;
             c=0;
         }
+        
         if(b==10){
             a++;
             b=0;
         }
-        _CP0_SET_COUNT(0);
+        
+        char fps[5];
+        clear_space(28 + 25, 80, 80);
+        sprintf(fps, "%1.2f", (1.0*2400000)/_CP0_GET_COUNT());
+        while(fps[m]) {
+            print_char(28 + 5*(5+m), 80, fps[m]);
+            m++;
+        }
+        m = 0;
+        
         while(_CP0_GET_COUNT()<2400000) {;}
     }
 }

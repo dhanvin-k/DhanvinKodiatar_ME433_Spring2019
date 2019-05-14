@@ -205,5 +205,6 @@ void LCD_drawPixel(unsigned short x, unsigned short y, unsigned short color);
 void LCD_clearScreen(unsigned short color);
 void print_char(unsigned short, unsigned short, char);
 void clear_space(unsigned short, unsigned, unsigned short);
+void draw_progress(int);
 
 #endif
