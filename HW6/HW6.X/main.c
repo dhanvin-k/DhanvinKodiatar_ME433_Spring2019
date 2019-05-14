@@ -118,8 +118,8 @@ int main() {
         }
         
         char fps[5];
-        clear_space(28 + 25, 80, 80);
-        sprintf(fps, "%1.2f", (1.0*2400000)/_CP0_GET_COUNT());
+        clear_space(28 + 25, 80, 85);
+        sprintf(fps, "%1.2f", (1.0*24000000)/_CP0_GET_COUNT());
         while(fps[m]) {
             print_char(28 + 5*(5+m), 80, fps[m]);
             m++;
