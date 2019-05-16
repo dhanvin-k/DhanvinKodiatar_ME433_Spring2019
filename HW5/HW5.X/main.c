@@ -39,6 +39,7 @@
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
 void initExpander(void);
+void setExpander(char pin, char level);
 
 int main() {
 
@@ -70,19 +71,6 @@ int main() {
     TRISBbits.TRISB3 = 0;
     */
     __builtin_enable_interrupts();
-    
-    i2c_master_setup();
-    i2c_master_start();
-    i2c_master_send(SLAVE_ADDR<<1);
-    i2c_master_send(0x00);
-    i2c_master_send(0xF0);
-    i2c_master_stop();
-    
-    i2c_master_start();
-    i2c_master_send(SLAVE_ADDR<<1);
-    i2c_master_send(0x0A);
-    i2c_master_send(0x1);
-    i2c_master_stop();
 /*
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
@@ -97,8 +85,16 @@ int main() {
 void initExpander(void) {
     i2c_master_setup();
     i2c_master_start();
-    i2c_master_send(SLAVE_ADDR<<1);
+    i2c_master_send(SLAVE_ADDR << 1);
     i2c_master_send(0x00);
     i2c_master_send(0xF0);
+    i2c_master_stop();
+}
+
+void setExpander(char pin, char level) {
+    i2c_master_start();
+    i2c_master_send(SLAVE_ADDR << 1);
+    i2c_master_send(0x0A);
+    i2c_master_send(level << pin);
     i2c_master_stop();
 }
