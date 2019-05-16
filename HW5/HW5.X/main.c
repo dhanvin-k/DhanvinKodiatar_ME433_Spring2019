@@ -64,12 +64,10 @@ int main() {
     // do your TRIS and LAT commands here
     TRISBbits.TRISB4 = 1;
     TRISAbits.TRISA4 = 1;
-    //LATAbits.LATA4 = 0;
-    /*
-    TRISBbits.TRISB2 = 0;
-    RPB2Rbits.RPB2R = 0b0100;
-    TRISBbits.TRISB3 = 0;
-    */
+    
+    // Initializing I2C2 with initExpander function created
+    initExpander();
+    
     __builtin_enable_interrupts();
 /*
     while(1) {
