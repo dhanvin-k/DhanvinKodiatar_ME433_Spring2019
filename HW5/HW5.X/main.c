@@ -38,6 +38,8 @@
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
+void initExpander(void);
+
 int main() {
 
     __builtin_disable_interrupts();
@@ -90,4 +92,13 @@ int main() {
         while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
             LATAbits.LATA4 = 0; }
     }*/
+}
+
+void initExpander(void) {
+    i2c_master_setup();
+    i2c_master_start();
+    i2c_master_send(SLAVE_ADDR<<1);
+    i2c_master_send(0x00);
+    i2c_master_send(0xF0);
+    i2c_master_stop();
 }
