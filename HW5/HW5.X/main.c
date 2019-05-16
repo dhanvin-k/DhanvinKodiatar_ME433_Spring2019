@@ -1,6 +1,7 @@
 #include<xc.h>           // processor SFR definitions
 #include<sys/attribs.h>  // __ISR macro
 #include<stdio.h>
+#include"i2c_master_noint.h"
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
@@ -37,7 +38,6 @@
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
-
 int main() {
 
     __builtin_disable_interrupts();
@@ -53,20 +53,41 @@ int main() {
 
     // disable JTAG to get pins back
     DDPCONbits.JTAGEN = 0;
+    
+    // Turn off AN2 and AN3 pins (make B2 and B3 available for I2C)
+    ANSELBbits.ANSB2 = 0;
+    ANSELBbits.ANSB3 = 0;
 
     // do your TRIS and LAT commands here
     TRISBbits.TRISB4 = 1;
-    TRISAbits.TRISA4 = 0;
-    LATAbits.LATA4 = 1;
-
+    TRISAbits.TRISA4 = 1;
+    //LATAbits.LATA4 = 0;
+    /*
+    TRISBbits.TRISB2 = 0;
+    RPB2Rbits.RPB2R = 0b0100;
+    TRISBbits.TRISB3 = 0;
+    */
     __builtin_enable_interrupts();
-
+    
+    i2c_master_setup();
+    i2c_master_start();
+    i2c_master_send(SLAVE_ADDR<<1);
+    i2c_master_send(0x00);
+    i2c_master_send(0xF0);
+    i2c_master_stop();
+    
+    i2c_master_start();
+    i2c_master_send(SLAVE_ADDR<<1);
+    i2c_master_send(0x0A);
+    i2c_master_send(0x1);
+    i2c_master_stop();
+/*
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
         LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
-        while(_CP0_GET_COUNT() < 11999) { ; }       // Toggle it ON or OFF for 0.5 ms
+        while(_CP0_GET_COUNT() < 11999999) { ; }       // Toggle it ON or OFF for 0.5 ms
         
         while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
             LATAbits.LATA4 = 0; }
-    }
+    }*/
 }
