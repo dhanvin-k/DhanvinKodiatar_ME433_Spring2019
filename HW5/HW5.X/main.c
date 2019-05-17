@@ -40,6 +40,7 @@
 
 void initExpander(void);
 void setExpander(char pin, char level);
+char getExpander(void);
 
 int main() {
 
@@ -69,15 +70,21 @@ int main() {
     initExpander();
     
     __builtin_enable_interrupts();
-/*
+    
     while(1) {
+        /*
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
         LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
         while(_CP0_GET_COUNT() < 11999999) { ; }       // Toggle it ON or OFF for 0.5 ms
         
         while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
-            LATAbits.LATA4 = 0; }
-    }*/
+            LATAbits.LATA4 = 0; }*/
+        
+        setExpander(0,0);
+        while(getExpander() >> 7) {
+            setExpander(0,1);
+        }
+    }
 }
 
 void initExpander(void) {
@@ -95,4 +102,16 @@ void setExpander(char pin, char level) {
     i2c_master_send(0x0A);
     i2c_master_send(level << pin);
     i2c_master_stop();
+}
+
+char getExpander(void) {
+    i2c_master_start();
+    i2c_master_send(SLAVE_ADDR << 1);
+    i2c_master_send(0x09);
+    i2c_master_restart();
+    i2c_master_send((SLAVE_ADDR << 1) | 1);
+    char r = i2c_master_recv();
+    i2c_master_ack(1);
+    i2c_master_stop();
+    return r;
 }
