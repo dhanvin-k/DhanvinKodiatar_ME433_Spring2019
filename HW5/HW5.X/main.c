@@ -72,46 +72,41 @@ int main() {
     __builtin_enable_interrupts();
     
     while(1) {
-        /*
-        _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
-        LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
-        while(_CP0_GET_COUNT() < 11999999) { ; }       // Toggle it ON or OFF for 0.5 ms
+        setExpander(0,0);   // turn LED OFF when the button is pushed
         
-        while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
-            LATAbits.LATA4 = 0; }*/
-        
-        setExpander(0,0);
-        while(getExpander() >> 7) {
-            setExpander(0,1);
+        char pushed = getExpander() >> 7;   // right shift by 7 to get logical '1' for unpushed or
+                                            // logical '0' for pushed for the GP7 pin
+        while(pushed) {     // LED is turned ON when the button NOT pushed
+            setExpander(0,1);   // turn LED ON
         }
     }
 }
 
 void initExpander(void) {
-    i2c_master_setup();
-    i2c_master_start();
-    i2c_master_send(SLAVE_ADDR << 1);
-    i2c_master_send(0x00);
-    i2c_master_send(0xF0);
-    i2c_master_stop();
+    i2c_master_setup();     // function to set BAUD of I2C at 400 kHz
+    i2c_master_start();     // make the start bit
+    i2c_master_send(SLAVE_ADDR << 1 | 0);       // write the address, shifted left by 1, or'ed with a 0 to indicate writing
+    i2c_master_send(0x00);      // set the direction of the pins with IODIR register addressed at 0x00
+    i2c_master_send(0xF0);      // set GP0 - 3 as OUTPUT pins and GP4 - 7 as INPUT pins
+    i2c_master_stop();      // make the stop bit
 }
 
 void setExpander(char pin, char level) {
-    i2c_master_start();
-    i2c_master_send(SLAVE_ADDR << 1);
-    i2c_master_send(0x0A);
-    i2c_master_send(level << pin);
-    i2c_master_stop();
+    i2c_master_start();     // make the start bit
+    i2c_master_send(SLAVE_ADDR << 1  | 0);      // write the address, shifted left by 1, or'ed with a 0 to indicate writing
+    i2c_master_send(0x0A);      // write to OLAT register addressed at 0x0A
+    i2c_master_send(level << pin);      // set 'value'  'pin' number of OLAT registers
+    i2c_master_stop();      // make the stop bit
 }
 
 char getExpander(void) {
-    i2c_master_start();
-    i2c_master_send(SLAVE_ADDR << 1);
-    i2c_master_send(0x09);
-    i2c_master_restart();
-    i2c_master_send((SLAVE_ADDR << 1) | 1);
-    char r = i2c_master_recv();
-    i2c_master_ack(1);
-    i2c_master_stop();
+    i2c_master_start();     // make the start bit
+    i2c_master_send(SLAVE_ADDR << 1 | 0);       // write the address, shifted left by 1, or'ed with a 0 to indicate writing
+    i2c_master_send(0x09);      // read from GPIO register addressed at 0x09
+    i2c_master_restart();       // make the restart bit
+    i2c_master_send((SLAVE_ADDR << 1) | 1);     // write the address, shifted left by 1, or'ed with a 1 to indicate reading
+    char r = i2c_master_recv();     // save the value returned
+    i2c_master_ack(1);      // make the ack bit
+    i2c_master_stop();      // make the stop bit
     return r;
 }
