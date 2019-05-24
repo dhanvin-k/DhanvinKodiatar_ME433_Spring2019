@@ -82,8 +82,11 @@ int main() {
             setExpander(0,0);   // turn LED ON
             _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
             LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
-            while(_CP0_GET_COUNT() < 1199999) { ; }
+            while(_CP0_GET_COUNT() < 4800000) { ; }
         }
+        _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
+        LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
+        while(_CP0_GET_COUNT() < 4800000) { ; }
     }
 }
 

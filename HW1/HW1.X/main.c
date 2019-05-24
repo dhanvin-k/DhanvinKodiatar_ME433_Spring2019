@@ -63,7 +63,7 @@ int main() {
     while(1) {
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
         LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
-        while(_CP0_GET_COUNT() < 11999) { ; }       // Toggle it ON or OFF for 0.5 ms
+        while(_CP0_GET_COUNT() < 23999) { ; }       // Toggle it ON or OFF for 0.5 ms
         
         while(!PORTBbits.RB4) {     // If the button is pushed turn LED OFF and wait 
             LATAbits.LATA4 = 0; }
