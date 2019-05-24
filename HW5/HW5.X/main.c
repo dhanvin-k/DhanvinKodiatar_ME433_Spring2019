@@ -73,19 +73,19 @@ int main() {
     __builtin_enable_interrupts();
     
     while(1) {
-        setExpander(0,1);   // turn LED OFF when the button is pushed
+        setExpander(0,1);   // turn LED ON when the button is pushed
         
         char pushed = getExpander() >> 7;   // right shift by 7 to get logical '1' for unpushed or
                                             // logical '0' for pushed for the GP7 pin
         
-        while(getExpander() >> 7) {     // LED is turned ON when the button NOT pushed
-            setExpander(0,0);   // turn LED ON
+        while(getExpander() >> 7) {     // LED is turned OFF when the button NOT pushed
+            setExpander(0,0);   // turn LED OFF
             _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
-            LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
-            while(_CP0_GET_COUNT() < 4800000) { ; }
+            LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF at 5 Hz
+            while(_CP0_GET_COUNT() < 4800000) { ; }     // 
         }
         _CP0_SET_COUNT(0);      // Setting Core Timer count to 0
-        LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF
+        LATAbits.LATA4 = !LATAbits.LATA4;       // Toggling the Green LED ON or OFF at 5 Hz
         while(_CP0_GET_COUNT() < 4800000) { ; }
     }
 }
