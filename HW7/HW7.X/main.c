@@ -2,7 +2,8 @@
 #include<sys/attribs.h>  // __ISR macro
 #include<string.h>
 #include<stdio.h>
-#include "ili9341.h"
+#include"ili9341.h"
+#include"imu.h"
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
@@ -63,7 +64,7 @@ int main() {
     
     SPI1_init();
     LCD_init();
-    initExpander();
+    initIMU();
     
     __builtin_enable_interrupts();
     
