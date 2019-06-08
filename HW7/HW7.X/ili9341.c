@@ -275,6 +275,14 @@ void print_char(unsigned short x, unsigned short y, char ch) {
     }
 }
 
+void print_message(char *message, unsigned short x, unsigned short y) {
+    int index = 0;
+    while(*(message + index)) {
+        print_char(x + 5*index, y, *(message + index));
+        index++;
+    }
+}
+
 void clear_space(unsigned short x, unsigned y, unsigned short end) {
     int i;
     while(x<=end)  {

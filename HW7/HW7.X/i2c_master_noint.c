@@ -5,6 +5,7 @@
 
 #include<xc.h>
 #include"i2c_master_noint.h"
+#include  "ili9341.h"
 
 void i2c_master_setup(void) {
   I2C2BRG = 53;            // I2CBRG = [1/(2*Fsck) - PGD]*Pblck - 2 
@@ -33,6 +34,7 @@ void i2c_master_send(unsigned char byte) { // send a byte to slave
 
 unsigned char i2c_master_recv(void) { // receive a byte from the slave
     I2C2CONbits.RCEN = 1;             // start receiving data
+    
     while(!I2C2STATbits.RBF) { ; }    // wait to receive the data
     return I2C2RCV;                   // read and return the data
 }
