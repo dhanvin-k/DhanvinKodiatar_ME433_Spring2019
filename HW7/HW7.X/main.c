@@ -41,7 +41,6 @@
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
-
 int main() {
 
     __builtin_disable_interrupts();
@@ -72,8 +71,15 @@ int main() {
     
     __builtin_enable_interrupts();
     
-    LCD_clearScreen(ILI9341_MAROON);  
+    LCD_clearScreen(ILI9341_MAROON); 
     
+    unsigned char data[14];
+    unsigned char message[20];
+    I2C_read_multiple(SLAVE_ADDR, 0x20, data, 14);
+    short temp = getTemp(data);
+    sprintf(message, "%d", temp);
+    print_message(28, 32, message);
+   
     while(1) {
         
     }

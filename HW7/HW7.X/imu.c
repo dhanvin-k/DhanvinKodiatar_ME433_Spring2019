@@ -31,15 +31,72 @@ void initIMU(void) {
 char getWHO_AM_I(void) {
     i2c_master_start();     // make the start bit
     i2c_master_send(SLAVE_ADDR << 1 | 0);       // write the address, shifted left by 1, or'ed with a 0 to indicate writing
-    
     i2c_master_send(0x0F);      // read from WHO_AM_I register addressed at 0x0F
-    
     i2c_master_restart();       // make the restart bit
-    
     i2c_master_send((SLAVE_ADDR << 1) | 1);     // write the address, shifted left by 1, or'ed with a 1 to indicate reading
-    
     char r = i2c_master_recv();     // save the value returned
     i2c_master_ack(1);      // make the ack bit
     i2c_master_stop();      // make the stop bit
     return r;
+}
+
+void I2C_read_multiple(unsigned char address, unsigned char registerAdd, unsigned char *data, int length) {
+    int i = 0;
+    i2c_master_start();     // make the start bit
+    i2c_master_send(SLAVE_ADDR << 1 | 0);       // write the address, shifted left by 1, or'ed with a 0 to indicate writing
+    i2c_master_send(registerAdd);      // read from WHO_AM_I register addressed at 0x0F
+    i2c_master_restart();       // make the restart bit
+    i2c_master_send((SLAVE_ADDR << 1) | 1);     // write the address, shifted left by 1, or'ed with a 1 to indicate reading
+    while(i<length) {
+        data[i] = i2c_master_recv();     // save the value returned
+        if(i == length-1) {
+            i2c_master_ack(1);      // make the ack bit
+        }
+        else {
+            i2c_master_ack(0);      // make the ack bit
+        }
+        i = i + 1;
+    }
+    i2c_master_stop();      // make the stop bit
+}
+
+short getTemp(unsigned char *data) {
+    short temp = (data[1]<<8 | data[0]);
+    return temp;
+}
+
+short getGyroX(unsigned char *data) {
+    short gyrox = data[3]<<8 | data[2];
+    return gyrox;
+}
+
+short getGyroY(unsigned char *data) {
+    short gyroy = data[5]<<8 | data[4];
+    return gyroy;
+}
+
+short getGyroZ(unsigned char *data) {
+    short gyroz = data[7]<<8 | data[6];
+    return gyroz;
+}
+
+short getXLX(unsigned char *data) {
+    short getXLX = data[9]<<8 | data[8];
+    return getXLX;
+}
+
+short getXLY(unsigned char *data) {
+    short getXLY = data[11]<<8 | data[10];
+    return getXLY;
+}
+
+short getXLZ(unsigned char *data) {
+    short getXLZ = data[13]<<8 | data[12];
+    return getXLZ;
+}
+
+void hello(int x) {
+    unsigned char message[5];
+    sprintf(message, "hello");
+    print_message(28, 32+x, message);
 }

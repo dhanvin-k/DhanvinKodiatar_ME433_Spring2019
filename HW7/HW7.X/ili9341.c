@@ -275,7 +275,7 @@ void print_char(unsigned short x, unsigned short y, char ch) {
     }
 }
 
-void print_message(char *message, unsigned short x, unsigned short y) {
+void print_message(unsigned short x, unsigned short y, char *message) {
     int index = 0;
     while(*(message + index)) {
         print_char(x + 5*index, y, *(message + index));
