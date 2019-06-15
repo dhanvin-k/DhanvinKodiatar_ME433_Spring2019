@@ -28,7 +28,7 @@ void initIMU(void) {
     i2c_master_stop();      // make the stop bit
 }
 
-char getWHO_AM_I(void) {
+unsigned char getWHO_AM_I(void) {
     i2c_master_start();     // make the start bit
     i2c_master_send(SLAVE_ADDR << 1 | 0);       // write the address, shifted left by 1, or'ed with a 0 to indicate writing
     i2c_master_send(0x0F);      // read from WHO_AM_I register addressed at 0x0F

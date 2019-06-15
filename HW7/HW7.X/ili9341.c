@@ -293,6 +293,15 @@ void clear_space(unsigned short x, unsigned y, unsigned short end) {
     }
 }
 
+void clear_block(unsigned short x, unsigned y, unsigned short xend, unsigned short yend) {
+    int i,j;
+    for (j = y; j<yend; j++) {
+        for (i = x; i<xend; i++) {
+            LCD_drawPixel(i, j, ILI9341_MAROON);
+        }
+    }
+}
+
 void draw_progress(int count) {
     int i;
     for(i = 0; i<=8; i++) {

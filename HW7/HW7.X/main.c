@@ -74,13 +74,21 @@ int main() {
     LCD_clearScreen(ILI9341_MAROON); 
     
     unsigned char data[14];
-    unsigned char message[20];
-    I2C_read_multiple(SLAVE_ADDR, 0x20, data, 14);
-    short temp = getTemp(data);
-    sprintf(message, "%d", temp);
-    print_message(28, 32, message);
-   
+    unsigned char message[3], whoami[15] = "WHO AM I = ", ACCx[5], ACCy[5], X[15] = "acc_X = ", Y[15] = "acc_Y = ";
+    print_message(5, 5, whoami);
+    print_message(5, 13, X);
+    print_message(5, 21, Y);
+    sprintf(message, "%d", getWHO_AM_I());
+    clear_space(60, 5, 75);
+    print_message(60, 5, message);
+    
     while(1) {
+        _CP0_SET_COUNT(0);
+                
+        I2C_read_multiple(SLAVE_ADDR, 0x20, data, 14);
         
+        
+        
+        while(_CP0_GET_COUNT()<1200000) {;}     // 20 Hz delay
     }
 }
