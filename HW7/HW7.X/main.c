@@ -98,6 +98,7 @@ int main() {
         print_message(45, 21, message);
         
         draw_whitebars(ILI9341_BLACK);
+        draw_xprogress(x, ILI9341_GREEN);
         
         while(_CP0_GET_COUNT()<1200000) {;}     // 20 Hz delay
     }
