@@ -262,23 +262,23 @@ void LCD_clearScreen(unsigned short color) {
     CS = 1; // CS
 }
 
-void print_char(unsigned short x, unsigned short y, char ch) {
+void print_char(unsigned short x, unsigned short y, char ch, char color) {
     int i, j;
     char sh;
     for (i = 0; i<5; i++) {
         sh = ASCII[ch-32][i];
         for (j = 0; j<8; j++) {
             if ((sh>>j) & (0b00000001) == 1) {
-                LCD_drawPixel(x + i, y + j, ILI9341_GREEN);
+                LCD_drawPixel(x + i, y + j, color);
             }
         }
     }
 }
 
-void print_message(unsigned short x, unsigned short y, char *message) {
+void print_message(unsigned short x, unsigned short y, char *message, char color) {
     int index = 0;
     while(*(message + index)) {
-        print_char(x + 5*index, y, *(message + index));
+        print_char(x + 5*index, y, *(message + index), color);
         index++;
     }
 }
@@ -293,55 +293,9 @@ void clear_space(unsigned short x, unsigned y, unsigned short end) {
     }
 }
 
-void clear_block(unsigned short x, unsigned y, unsigned short xend, unsigned short yend) {
-    int i,j;
-    for (j = y; j<yend; j++) {
-        for (i = x; i<xend; i++) {
-            LCD_drawPixel(i, j, ILI9341_MAROON);
-        }
-    }
-}
-
-void draw_progress(int count) {
+void draw_progress(int count, char color) {
     int i;
     for(i = 0; i<=8; i++) {
-        LCD_drawPixel(28 + count, 50 + i, ILI9341_GREEN);
-    }
-}
-
-void draw_whitebars(char color) {
-    int i, j;
-    for (j = 0; j<=100; j++) {
-        for (i = 0; i<4; i++) {
-            LCD_drawPixel(120 + j, 160 + i, color);
-            LCD_drawPixel(120 + j, 160 - i, color);
-            LCD_drawPixel(120 - j, 160 + i, color);
-            LCD_drawPixel(120 - j, 160 - i, color);
-            LCD_drawPixel(120 + i, 160 + j, color);
-            LCD_drawPixel(120 + i, 160 - j, color);
-            LCD_drawPixel(120 - i, 160 + j, color);
-            LCD_drawPixel(120 - i, 160 - j, color);
-        }
-    }
-}
-
-void draw_xprogress(signed int x, char color) {
-    int i, j;
-    if (x>=0) {
-        for (j = 0; j<=x; j++) {
-            for (i = 0; i<4; i++) {
-                LCD_drawPixel(120 + j, 160 + i, color);
-                LCD_drawPixel(120 + j, 160 - i, color);
-            }
-        }
-    }
-    
-    else {
-        for (j = 0; j>=x; j--) {
-            for (i = 0; i<4; i++) {
-                LCD_drawPixel(120 + j, 160 + i, color);
-                LCD_drawPixel(120 + j, 160 - i, color);
-            }
-        }
+        LCD_drawPixel(28 + count, 50 + i, color);
     }
 }

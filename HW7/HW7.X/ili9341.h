@@ -203,12 +203,9 @@ void LCD_data16(unsigned short dat);
 void LCD_setAddr(unsigned short x, unsigned short y, unsigned short w, unsigned short h);
 void LCD_drawPixel(unsigned short x, unsigned short y, unsigned short color);
 void LCD_clearScreen(unsigned short color);
-void print_char(unsigned short x, unsigned short y, char ch);
-void print_message(unsigned short x, unsigned short y, char *message);
+void print_char(unsigned short x, unsigned short y, char ch, char color);
+void print_message(unsigned short x, unsigned short y, char *message, char color);
 void clear_space(unsigned short x, unsigned y, unsigned short end);
-void clear_block(unsigned short x, unsigned y, unsigned short xend, unsigned short yend);
-void draw_progress(int count);
-void draw_whitebars(char color);
-void draw_xprogress(signed int x, char color);
+void draw_progress(int count, char color);
 
 #endif

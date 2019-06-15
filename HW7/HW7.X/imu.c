@@ -98,5 +98,63 @@ short getXLZ(unsigned char *data) {
 void hello(int x) {
     unsigned char message[5];
     sprintf(message, "hello");
-    print_message(28, 32+x, message);
+    print_message(28, 32+x, message, ILI9341_GREEN);
+}
+
+void draw_whitebars(char color) {
+    int i, j;
+    for (j = 0; j<=100; j++) {
+        for (i = 0; i<4; i++) {
+            LCD_drawPixel(120 + j, 160 + i, color);
+            LCD_drawPixel(120 + j, 160 - i, color);
+            LCD_drawPixel(120 - j, 160 + i, color);
+            LCD_drawPixel(120 - j, 160 - i, color);
+            LCD_drawPixel(120 + i, 160 + j, color);
+            LCD_drawPixel(120 + i, 160 - j, color);
+            LCD_drawPixel(120 - i, 160 + j, color);
+            LCD_drawPixel(120 - i, 160 - j, color);
+        }
+    }
+}
+
+void draw_xprogress(signed int x, char color) {
+    int i, j;
+    if (x>=0) {
+        for (j = 0; j<=x; j++) {
+            for (i = 0; i<4; i++) {
+                LCD_drawPixel(120 + j, 160 + i, color);
+                LCD_drawPixel(120 + j, 160 - i, color);
+            }
+        }
+    }
+    
+    else {
+        for (j = 0; j>=x; j--) {
+            for (i = 0; i<4; i++) {
+                LCD_drawPixel(120 + j, 160 + i, color);
+                LCD_drawPixel(120 + j, 160 - i, color);
+            }
+        }
+    }
+}
+
+void draw_yprogress(signed int y, char color) {
+    int i, j;
+    if (y>=0) {
+        for (j = 0; j<=y; j++) {
+            for (i = 0; i<4; i++) {
+                LCD_drawPixel(120 + i, 160 + j, color);
+                LCD_drawPixel(120 - i, 160 + j, color);
+            }
+        }
+    }
+    
+    else {
+        for (j = 0; j>=y; j--) {
+            for (i = 0; i<4; i++) {
+                LCD_drawPixel(120 + i, 160 + j, color);
+                LCD_drawPixel(120 - i, 160 + j, color);
+            }
+        }
+    }
 }
