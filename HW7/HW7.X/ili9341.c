@@ -308,3 +308,7 @@ void draw_progress(int count) {
         LCD_drawPixel(28 + count, 50 + i, ILI9341_GREEN);
     }
 }
+
+void draw_whitebars(void) {
+    
+}

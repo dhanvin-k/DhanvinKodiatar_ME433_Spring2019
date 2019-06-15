@@ -2,6 +2,7 @@
 #define IMU_H__
 
 #define SLAVE_ADDR 0x6B
+#define SCALE_FACTOR 0.006
 
 void initIMU(void);
 unsigned char getWHO_AM_I(void);
