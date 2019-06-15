@@ -309,6 +309,18 @@ void draw_progress(int count) {
     }
 }
 
-void draw_whitebars(void) {
-    
+void draw_whitebars(char color) {
+    int i, j;
+    for (j=0; j<=100; j++) {
+        for (i = 0; i<4; i++) {
+            LCD_drawPixel(120 + j, 160 + i, color);
+            LCD_drawPixel(120 + j, 160 - i, color);
+            LCD_drawPixel(120 - j, 160 + i, color);
+            LCD_drawPixel(120 - j, 160 - i, color);
+            LCD_drawPixel(120 + i, 160 + j, color);
+            LCD_drawPixel(120 + i, 160 - j, color);
+            LCD_drawPixel(120 - i, 160 + j, color);
+            LCD_drawPixel(120 - i, 160 - j, color);
+        }
+    }
 }

@@ -208,6 +208,6 @@ void print_message(unsigned short x, unsigned short y, char *message);
 void clear_space(unsigned short x, unsigned y, unsigned short end);
 void clear_block(unsigned short x, unsigned y, unsigned short xend, unsigned short yend);
 void draw_progress(int count);
-void draw_whitebars(void);
+void draw_whitebars(char color);
 
 #endif

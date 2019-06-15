@@ -73,8 +73,8 @@ int main() {
     
     LCD_clearScreen(ILI9341_MAROON); 
     
-    unsigned char data[14];
-    unsigned char message[10], whoami[15] = "WHO AM I = ", X[10] = "acc_X = ", Y[10] = "acc_Y = ";
+    unsigned char data[14], message[10], whoami[15] = "WHO AM I = ", X[10] = "acc_X = ", Y[10] = "acc_Y = ";
+    
     print_message(5, 5, whoami);
     print_message(5, 13, X);
     print_message(5, 21, Y);
@@ -96,6 +96,8 @@ int main() {
         sprintf(message, "%1.2f",y);
         clear_space(45, 21, 70);
         print_message(45, 21, message);
+        
+        draw_whitebars(ILI9341_BLACK);
         
         while(_CP0_GET_COUNT()<1200000) {;}     // 20 Hz delay
     }
