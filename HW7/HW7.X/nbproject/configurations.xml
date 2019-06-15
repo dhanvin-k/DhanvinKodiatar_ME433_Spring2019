@@ -7,6 +7,7 @@
       <itemPath>ili9341.h</itemPath>
       <itemPath>imu.h</itemPath>
       <itemPath>i2c_master_noint.h</itemPath>
+      <itemPath>common.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
