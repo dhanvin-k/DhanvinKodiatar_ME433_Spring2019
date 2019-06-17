@@ -262,7 +262,7 @@ void LCD_clearScreen(unsigned short color) {
     CS = 1; // CS
 }
 
-void print_char(unsigned short x, unsigned short y, char ch, char color) {
+void print_char(unsigned short x, unsigned short y, char ch, unsigned short color) {
     int i, j;
     char sh;
     for (i = 0; i<5; i++) {
@@ -275,7 +275,7 @@ void print_char(unsigned short x, unsigned short y, char ch, char color) {
     }
 }
 
-void print_message(unsigned short x, unsigned short y, char *message, char color) {
+void print_message(unsigned short x, unsigned short y, char *message, unsigned short color) {
     int index = 0;
     while(*(message + index)) {
         print_char(x + 5*index, y, *(message + index), color);
@@ -293,7 +293,7 @@ void clear_space(unsigned short x, unsigned y, unsigned short end) {
     }
 }
 
-void draw_progress(int count, char color) {
+void draw_progress(int count, unsigned short color) {
     int i;
     for(i = 0; i<=8; i++) {
         LCD_drawPixel(28 + count, 50 + i, color);

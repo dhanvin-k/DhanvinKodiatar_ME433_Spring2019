@@ -37,7 +37,7 @@ int main() {
     
     __builtin_enable_interrupts();
     
-    LCD_clearScreen(ILI9341_MAROON); 
+    LCD_clearScreen(ILI9341_NAVY); 
     
     unsigned char data[14], message[10], whoami[15] = "WHO AM I = ", X[10] = "acc_X = ", Y[10] = "acc_Y = ";
     

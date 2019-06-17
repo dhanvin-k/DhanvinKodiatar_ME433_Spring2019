@@ -7,7 +7,6 @@
 void initIMU(void);
 unsigned char getWHO_AM_I(void);
 void I2C_read_multiple(unsigned char address, unsigned char registerAdd, unsigned char *data, int length);
-void hello(int);
 void draw_whitebars(char color);
 void draw_xprogress(signed int x, char color);
 void draw_yprogress(signed int y, char color);

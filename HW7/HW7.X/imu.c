@@ -95,12 +95,6 @@ short getXLZ(unsigned char *data) {
     return getXLZ;
 }
 
-void hello(int x) {
-    unsigned char message[5];
-    sprintf(message, "hello");
-    print_message(28, 32+x, message, ILI9341_GREEN);
-}
-
 void draw_whitebars(char color) {
     int i, j;
     for (j = 0; j<=100; j++) {
