@@ -64,6 +64,7 @@ uint8_t APP_MAKE_BUFFER_DMA_READY dataOut[APP_READ_BUFFER_SIZE];
 uint8_t APP_MAKE_BUFFER_DMA_READY readBuffer[APP_READ_BUFFER_SIZE];
 int len, i = 0;
 int startTime = 0; // to remember the loop time
+int pressed = 0;
 
 // *****************************************************************************
 /* Application Data
@@ -362,8 +363,6 @@ void APP_Initialize(void) {
     
     __builtin_enable_interrupts();
     
-    appData.pressed = 0;
-
     startTime = _CP0_GET_COUNT();
 }
 
@@ -484,27 +483,36 @@ void APP_Tasks(void) {
             i++; // increment the index so we see a change in the text
             /* IF A LETTER WAS RECEIVED, ECHO IT BACK SO THE USER CAN SEE IT */
             if (appData.isReadComplete) {
-                if (appData.readBuffer == 'r') {
-                    appData.pressed = 1;
-                }
+//                if (appData.readBuffer[0] == 'r') {
+//                    appData.pressed = 1;
+//                }
                 dataOut[0] = 0;
                 USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                         &appData.writeTransferHandle,
-                        dataout, 1,
+                        dataOut, 1,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
+                if (appData.readBuffer[0] == 'r') {
+                    pressed = 1;
+                    i = 0;
+                }
             }
             /* ELSE SEND THE MESSAGE YOU WANTED TO SEND */
             else {
-                if (appData.pressed == 1) {
-                    USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
+                if (pressed == 1) {
+                    if (i == 101) {
+                        //i = 0;
+                        pressed = 0;
+                    }
+                }
+                
+                else {
+                    len = 1;
+                    dataOut[0] = 0;
+                }
+                USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                         &appData.writeTransferHandle, dataOut, len,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
-                    if (i == 100) {
-                        i = 0;
-                        appData.pressed = 0;
-                    }
-                    startTime = _CP0_GET_COUNT(); // reset the timer for accurate delays
-                }
+                startTime = _CP0_GET_COUNT(); // reset the timer for accurate delays
             }
             break;
 
