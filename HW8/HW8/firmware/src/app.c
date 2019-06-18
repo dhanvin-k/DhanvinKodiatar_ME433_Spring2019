@@ -151,15 +151,15 @@ void APP_Initialize ( void )
     __builtin_enable_interrupts();
     
     LCD_clearScreen(ILI9341_NAVY);
+    
+    sprintf(appData.message, "WHO_AM_I = %d", getWHO_AM_I());
+    print_message(5, 5, appData.message, ILI9341_GREEN);
         
     sprintf(appData.message, "acc_X = ");
     print_message(5, 13, appData.message, ILI9341_GREEN);
     
     sprintf(appData.message, "acc_Y = ");
     print_message(5, 21, appData.message, ILI9341_GREEN);
-    
-    sprintf(appData.message, "WHO_AM_I = %d", getWHO_AM_I());
-    print_message(5, 5, appData.message, ILI9341_GREEN);
     
     /* TODO: Initialize your application's state machine and other
      * parameters.
