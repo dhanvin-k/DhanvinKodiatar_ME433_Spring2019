@@ -283,11 +283,11 @@ void print_message(unsigned short x, unsigned short y, char *message, unsigned s
     }
 }
 
-void clear_space(unsigned short x, unsigned y, unsigned short end) {
+void clear_space(unsigned short x, unsigned y, unsigned short end, unsigned short color) {
     int i;
     while(x<=end)  {
         for(i = 0; i<=8; i++) {
-            LCD_drawPixel(x, y + i, ILI9341_BLACK);
+            LCD_drawPixel(x, y + i, color);
         }
         x++;
     }

@@ -41,12 +41,14 @@ int main() {
     
     unsigned char data[14], message[10], whoami[15] = "WHO AM I = ", X[10] = "acc_X = ", Y[10] = "acc_Y = ";
     
-    print_message(5, 5, whoami, ILI9341_GREEN);
-    print_message(5, 13, X, ILI9341_GREEN);
-    print_message(5, 21, Y, ILI9341_GREEN);
-    sprintf(message, "%d", getWHO_AM_I());
-    clear_space(60, 5, 75);
-    print_message(60, 5, message, ILI9341_GREEN);
+    sprintf(message, "WHO_AM_I = %d", getWHO_AM_I());
+    print_message(5, 5, message, ILI9341_GREEN);
+    
+    sprintf(message, "acc_X = %d");
+    print_message(5, 13, message, ILI9341_GREEN);
+    
+    sprintf(message, "acc_Y = %d");
+    print_message(5, 21, message, ILI9341_GREEN);
     
     while(1) {
         _CP0_SET_COUNT(0);
@@ -55,12 +57,12 @@ int main() {
         
         float x = getXLX(data)*SCALE_FACTOR;
         sprintf(message, "%1.2f",x);
-        clear_space(45, 13, 70);
+        clear_space(45, 13, 70, ILI9341_NAVY);
         print_message(45, 13, message, ILI9341_GREEN);
         
         float y = getXLY(data)*SCALE_FACTOR;
         sprintf(message, "%1.2f",y);
-        clear_space(45, 21, 70);
+        clear_space(45, 21, 70, ILI9341_NAVY);
         print_message(45, 21, message, ILI9341_GREEN);
         
         draw_whitebars(ILI9341_BLACK);
