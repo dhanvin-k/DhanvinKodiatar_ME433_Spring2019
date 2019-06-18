@@ -39,7 +39,7 @@ int main() {
     
     LCD_clearScreen(ILI9341_NAVY); 
     
-    unsigned char data[14], message[10], whoami[15] = "WHO AM I = ", X[10] = "acc_X = ", Y[10] = "acc_Y = ";
+    unsigned char data[14], message[10];
     
     sprintf(message, "WHO_AM_I = %d", getWHO_AM_I());
     print_message(5, 5, message, ILI9341_GREEN);
