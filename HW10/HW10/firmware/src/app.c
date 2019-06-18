@@ -64,7 +64,6 @@ uint8_t APP_MAKE_BUFFER_DMA_READY dataOut[APP_READ_BUFFER_SIZE];
 uint8_t APP_MAKE_BUFFER_DMA_READY readBuffer[APP_READ_BUFFER_SIZE];
 int len, i = 0;
 int startTime = 0; // to remember the loop time
-int pressed = 0;
 
 // *****************************************************************************
 /* Application Data
@@ -483,25 +482,26 @@ void APP_Tasks(void) {
             i++; // increment the index so we see a change in the text
             /* IF A LETTER WAS RECEIVED, ECHO IT BACK SO THE USER CAN SEE IT */
             if (appData.isReadComplete) {
-//                if (appData.readBuffer[0] == 'r') {
-//                    appData.pressed = 1;
-//                }
+                if (appData.readBuffer[0] == 'r') {
+                    appData.pressed = 1;
+                    i = 0;
+                }
                 dataOut[0] = 0;
                 USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                         &appData.writeTransferHandle,
                         dataOut, 1,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
-                if (appData.readBuffer[0] == 'r') {
-                    pressed = 1;
-                    i = 0;
-                }
+//                if (appData.readBuffer[0] == 'r') {
+//                    pressed = 1;
+//                    i = 0;
+//                }
             }
             /* ELSE SEND THE MESSAGE YOU WANTED TO SEND */
             else {
-                if (pressed == 1) {
+                if (appData.pressed == 1) {
                     if (i == 101) {
                         //i = 0;
-                        pressed = 0;
+                        appData.pressed = 0;
                     }
                 }
                 

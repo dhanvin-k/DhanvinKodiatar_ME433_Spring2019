@@ -157,6 +157,8 @@ typedef struct
     
     unsigned char data[14];
     
+    bool pressed;
+
 } APP_DATA;
 
 
