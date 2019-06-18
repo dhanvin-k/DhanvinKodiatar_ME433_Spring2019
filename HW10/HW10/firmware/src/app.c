@@ -491,16 +491,11 @@ void APP_Tasks(void) {
                         &appData.writeTransferHandle,
                         dataOut, 1,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
-//                if (appData.readBuffer[0] == 'r') {
-//                    pressed = 1;
-//                    i = 0;
-//                }
             }
             /* ELSE SEND THE MESSAGE YOU WANTED TO SEND */
             else {
                 if (appData.pressed == 1) {
                     if (i == 101) {
-                        //i = 0;
                         appData.pressed = 0;
                     }
                 }
