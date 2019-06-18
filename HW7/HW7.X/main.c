@@ -44,7 +44,7 @@ int main() {
     print_message(5, 5, whoami, ILI9341_GREEN);
     print_message(5, 13, X, ILI9341_GREEN);
     print_message(5, 21, Y, ILI9341_GREEN);
-    sprintf(message, "%d", getWHO_AM_I(), ILI9341_GREEN);
+    sprintf(message, "%d", getWHO_AM_I());
     clear_space(60, 5, 75);
     print_message(60, 5, message, ILI9341_GREEN);
     
