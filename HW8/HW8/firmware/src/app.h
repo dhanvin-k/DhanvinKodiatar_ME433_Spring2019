@@ -114,9 +114,6 @@ typedef struct
     APP_STATES state;
     unsigned char data[14];
     unsigned char message[10];
-    //unsigned char whoami[15] = "WHO AM I = ";
-    //unsigned char X[10] = "acc_X = ";
-    //unsigned char Y[10] = "acc_Y = ";
 
     /* TODO: Define any additional data used by the application. */
 
