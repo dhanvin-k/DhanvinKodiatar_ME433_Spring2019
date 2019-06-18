@@ -154,6 +154,10 @@ typedef struct
 
     /* Application CDC read buffer */
     uint8_t * readBuffer;
+    
+    unsigned char data[14];
+    
+    bool pressed;
 
 } APP_DATA;
 
