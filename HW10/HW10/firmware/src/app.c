@@ -336,18 +336,6 @@ void APP_Initialize(void) {
     
     __builtin_disable_interrupts();
 
-//    // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
-//    __builtin_mtc0(_CP0_CONFIG, _CP0_CONFIG_SELECT, 0xa4210583);
-//
-//    // 0 data RAM access wait states
-//    BMXCONbits.BMXWSDRM = 0x0;
-//
-//    // enable multi vector interrupts
-//    INTCONbits.MVEC = 0x1;
-//
-//    // disable JTAG to get pins back
-//    DDPCONbits.JTAGEN = 0;
-
     // do your TRIS and LAT commands here
     TRISBbits.TRISB4 = 1;
     TRISAbits.TRISA4 = 0;
@@ -471,14 +459,14 @@ void APP_Tasks(void) {
             /* THIS IS WHERE YOU CAN READ YOUR IMU, PRINT TO THE LCD, ETC */
             
             I2C_read_multiple(SLAVE_ADDR, 0x20, appData.data, 14);
-            float acc_X = getXLX(appData.data)*SCALE_FACTOR;
-            float acc_Y = getXLY(appData.data)*SCALE_FACTOR;
-            float acc_Z = getXLZ(appData.data)*SCALE_FACTOR;
-            float gyro_X = getGyroX(appData.data)*SCALE_FACTOR;
-            float gyro_Y = getGyroY(appData.data)*SCALE_FACTOR;
-            float gyro_Z = getGyroZ(appData.data)*SCALE_FACTOR;
+            float acc_X = getXLX(appData.data);
+            float acc_Y = getXLY(appData.data);
+            float acc_Z = getXLZ(appData.data);
+            float gyro_X = getGyroX(appData.data);
+            float gyro_Y = getGyroY(appData.data);
+            float gyro_Z = getGyroZ(appData.data);
             
-            len = sprintf(dataOut, "%d %1.2f %1.2f %1.2f %1.2f %1.2f %1.2f\r\n", i, acc_X, acc_Y, acc_Z, gyro_X, gyro_Y, gyro_Z);
+            len = sprintf(dataOut, "%3d\t   %5.2f   %5.2f   %5.2f   %5.2f   %5.2f   %5.2f\r\n", i, acc_X, acc_Y, acc_Z, gyro_X, gyro_Y, gyro_Z);
             i++; // increment the index so we see a change in the text
             /* IF A LETTER WAS RECEIVED, ECHO IT BACK SO THE USER CAN SEE IT */
             if (appData.isReadComplete) {
