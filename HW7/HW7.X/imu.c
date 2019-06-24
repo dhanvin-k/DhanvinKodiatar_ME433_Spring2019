@@ -116,6 +116,9 @@ void draw_xprogress(signed int x, char color) {
     if (x>=0) {
         for (j = 0; j<=x; j++) {
             for (i = 0; i<4; i++) {
+                if (x>100) {
+                    x = 100;
+                }
                 LCD_drawPixel(120 + j, 160 + i, color);
                 LCD_drawPixel(120 + j, 160 - i, color);
             }
@@ -125,6 +128,9 @@ void draw_xprogress(signed int x, char color) {
     else {
         for (j = 0; j>=x; j--) {
             for (i = 0; i<4; i++) {
+                if (x<-100) {
+                    x = -100;
+                }
                 LCD_drawPixel(120 + j, 160 + i, color);
                 LCD_drawPixel(120 + j, 160 - i, color);
             }
@@ -137,6 +143,9 @@ void draw_yprogress(signed int y, char color) {
     if (y>=0) {
         for (j = 0; j<=y; j++) {
             for (i = 0; i<4; i++) {
+                if (y>100) {
+                    y = 100;
+                }
                 LCD_drawPixel(120 + i, 160 + j, color);
                 LCD_drawPixel(120 - i, 160 + j, color);
             }
@@ -146,6 +155,9 @@ void draw_yprogress(signed int y, char color) {
     else {
         for (j = 0; j>=y; j--) {
             for (i = 0; i<4; i++) {
+                if (y<-100) {
+                    y = -100;
+                }
                 LCD_drawPixel(120 + i, 160 + j, color);
                 LCD_drawPixel(120 - i, 160 + j, color);
             }

@@ -213,7 +213,7 @@ void APP_Tasks ( void )
                 clear_space(45, 21, 70, ILI9341_NAVY);
                 print_message(45, 21, appData.message, ILI9341_GREEN);
 
-                draw_whitebars(ILI9341_BLACK);
+                draw_progressbars(ILI9341_BLACK);
                 draw_xprogress(x, ILI9341_GREEN);
                 draw_yprogress(y, ILI9341_GREEN);
 
