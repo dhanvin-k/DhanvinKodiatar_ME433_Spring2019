@@ -95,7 +95,7 @@ short getXLZ(unsigned char *data) {
     return getXLZ;
 }
 
-void draw_whitebars(char color) {
+void draw_progressbars(char color) {
     int i, j;
     for (j = 0; j<=100; j++) {
         for (i = 0; i<4; i++) {

@@ -67,7 +67,7 @@ int main() {
         clear_space(45, 21, 70, ILI9341_NAVY);
         print_message(45, 21, message, ILI9341_GREEN);
         
-        draw_whitebars(ILI9341_BLACK);          // Draws the progress bars
+        draw_progressbars(ILI9341_BLACK);          // Draws the progress bars
         draw_xprogress(x, ILI9341_GREEN);       // Shows x progress
         draw_yprogress(y, ILI9341_GREEN);       // Shows y progress
         
