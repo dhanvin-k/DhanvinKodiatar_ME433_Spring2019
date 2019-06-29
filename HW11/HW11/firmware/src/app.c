@@ -66,7 +66,7 @@ int len, i = 0;
 int startTime = 0; // to remember the loop time
 
 int MAFsize = 5, MAFindex = 0;
-float MAFarray[MAFsize], MAF;
+float MAFarray[MAFsize], MAF, IIF, FIR;
 
 // *****************************************************************************
 /* Application Data
@@ -353,6 +353,11 @@ void APP_Initialize(void) {
     
     __builtin_enable_interrupts();
     
+    int ind = 0;
+    for (ind = 0; ind < MAFsize; ind++) {
+        MAFarray[ind] = 0;
+    }
+    
     startTime = _CP0_GET_COUNT();
 }
 
@@ -465,11 +470,14 @@ void APP_Tasks(void) {
             float acc_Z = getXLZ(appData.data);
             MAFarray[MAFindex] = acc_Z;
             
-            float MAF = 0;
+            MAF = 0;
             int ind = 0;
             for (ind = 0;  ind<MAFsize; ind++) {
-                MAF = MAF + (1/MAFsize)*MAFarray;
+                MAF = MAF + (1/MAFsize)*MAFarray[ind];
             }
+            
+            float IIF = 0;
+            float FIR = 0;
             
             len = sprintf(dataOut, "%d %1.2f %1.2f %1.2f %1.2f\r\n", i, acc_Z, MAF, IIR, FIR);
             i++; // increment the index so we see a change in the text
