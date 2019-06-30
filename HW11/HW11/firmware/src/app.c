@@ -65,8 +65,10 @@ uint8_t APP_MAKE_BUFFER_DMA_READY readBuffer[APP_READ_BUFFER_SIZE];
 int len, i = 0;
 int startTime = 0; // to remember the loop time
 
-int MAFsize = 5, MAFindex = 0;
-float MAFarray[MAFsize], MAF, IIF, FIR;
+#define MAFsize 5
+int MAFindex = 0;
+float MAFarray[MAFsize];
+float MAF, IIR, FIR;
 
 // *****************************************************************************
 /* Application Data
@@ -479,7 +481,7 @@ void APP_Tasks(void) {
             float IIF = 0;
             float FIR = 0;
             
-            len = sprintf(dataOut, "%d %1.2f %1.2f %1.2f %1.2f\r\n", i, acc_Z, MAF, IIR, FIR);
+            len = sprintf(dataOut, "%3d\t   %5.2f   %5.2f   %5.2f   %5.2f\r\n", i, acc_Z, MAF, IIR, FIR);
             i++; // increment the index so we see a change in the text
             MAFindex++;
             
