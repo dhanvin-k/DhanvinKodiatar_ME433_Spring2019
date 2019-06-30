@@ -357,7 +357,7 @@ void APP_Initialize(void) {
     
     int ind = 0;
     for (ind = 0; ind < MAFsize; ind++) {
-        MAFarray[ind] = 0;
+        MAFarray[ind] = 0.0;
     }
     
     startTime = _CP0_GET_COUNT();
@@ -475,7 +475,7 @@ void APP_Tasks(void) {
             MAF = 0;
             int ind = 0;
             for (ind = 0;  ind<MAFsize; ind++) {
-                MAF = MAF + (1/MAFsize)*MAFarray[ind];
+                MAF = MAF + (1.0/MAFsize)*MAFarray[ind];
             }
             
             float IIF = 0;
