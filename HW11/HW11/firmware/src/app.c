@@ -66,9 +66,10 @@ int len, i = 0;
 int startTime = 0; // to remember the loop time
 
 #define MAFsize 5
+
 int MAFindex = 0;
 float MAFarray[MAFsize];
-float MAF, IIR, FIR;
+float MAF, IIR, FIR, A = 0.75, B = 0.25;
 
 // *****************************************************************************
 /* Application Data
@@ -217,7 +218,7 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * eventData, uintptr
 
         case USB_DEVICE_EVENT_CONFIGURED:
 
-            /* Check the configuratio. We only support configuration 1 */
+            /* Check the configuration. We only support configuration 1 */
             configuredEventData = (USB_DEVICE_EVENT_DATA_CONFIGURED*) eventData;
             if (configuredEventData->configurationValue == 1) {
                 /* Update LED to show configured state */
@@ -360,6 +361,8 @@ void APP_Initialize(void) {
         MAFarray[ind] = 0.0;
     }
     
+    IIR = 0.0;
+    
     startTime = _CP0_GET_COUNT();
 }
 
@@ -478,7 +481,8 @@ void APP_Tasks(void) {
                 MAF = MAF + (1.0/MAFsize)*MAFarray[ind];
             }
             
-            float IIF = 0;
+            float IIR = A*IIR + B*acc_Z;
+            
             float FIR = 0;
             
             len = sprintf(dataOut, "%3d\t   %5.2f   %5.2f   %5.2f   %5.2f\r\n", i, acc_Z, MAF, IIR, FIR);
