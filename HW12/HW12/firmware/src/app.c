@@ -49,6 +49,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
+#include "i2c_master_noint.h"
+#include "ili9341.h"
+#include "imu.h"
 
 
 // *****************************************************************************
@@ -255,6 +258,24 @@ void APP_Initialize(void) {
     //appData.emulateMouse = true;
     appData.hidInstance = 0;
     appData.isMouseReportSendBusy = false;
+    
+    /* PUT YOUR LCD, IMU, AND PIN INITIALIZATIONS HERE */
+    
+    __builtin_disable_interrupts();
+
+    // do your TRIS and LAT commands here
+    TRISBbits.TRISB4 = 1;
+    TRISAbits.TRISA4 = 0;
+    LATAbits.LATA4 = 1;
+    
+    ANSELBbits.ANSB2 = 0;
+    ANSELBbits.ANSB3 = 0;
+    
+    SPI1_init();
+    LCD_init();
+    initIMU();
+    
+    __builtin_enable_interrupts();
 }
 
 /******************************************************************************
@@ -307,11 +328,16 @@ void APP_Tasks(void) {
             
             // every 50th loop, or 20 times per second
             //if (movement_length > 50) {
-            if (inc == 100) {
+            
+            I2C_read_multiple(SLAVE_ADDR, 0x20, appData.data, 14);
+            float acc_X = getXLX(appData.data)*SCALE_FACTOR/10;
+            float acc_Y = getXLY(appData.data)*SCALE_FACTOR/10;
+            
+            if (inc == 10) {
                 appData.mouseButton[0] = MOUSE_BUTTON_STATE_RELEASED;
                 appData.mouseButton[1] = MOUSE_BUTTON_STATE_RELEASED;
-                appData.xCoordinate = (int8_t) 1;//dir_table[vector & 0x07];
-                appData.yCoordinate = (int8_t) 1;//dir_table[(vector + 2) & 0x07];
+                appData.xCoordinate = (int8_t) acc_X;//dir_table[vector & 0x07];
+                appData.yCoordinate = (int8_t) acc_Y;//dir_table[(vector + 2) & 0x07];
                 //vector++;
                 //movement_length = 0;
                 inc = 0;

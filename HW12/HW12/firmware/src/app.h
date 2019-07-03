@@ -139,6 +139,8 @@ typedef struct
 
     /* SET IDLE timer */
     uint16_t setIdleTimer;
+    
+    unsigned char data[14];
 
 } APP_DATA;
 
