@@ -393,7 +393,6 @@ void APP_Tasks(void) {
                             sizeof (MOUSE_REPORT));
                     appData.setIdleTimer = 0;
                 }
-                //movement_length++;
                 inc++;
             }
 
