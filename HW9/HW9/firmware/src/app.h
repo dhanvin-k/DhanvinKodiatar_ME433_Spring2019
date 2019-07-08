@@ -112,6 +112,8 @@ typedef struct
 {
     /* The application's current state */
     APP_STATES state;
+    unsigned char data[14];
+    unsigned char message[10];
 
     /* TODO: Define any additional data used by the application. */
 
