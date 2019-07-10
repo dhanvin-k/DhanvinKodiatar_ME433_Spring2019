@@ -39,7 +39,7 @@ int main() {
     
     LCD_clearScreen(BACKGROUND); 
     
-    unsigned char message[10];
+    unsigned char message[30];
     unsigned short x, y;
     unsigned int z;
     
@@ -54,14 +54,14 @@ int main() {
                 
         XPT2046_read(&x, &y, &z);
         
-        sprintf(message, "%d", x);
+        sprintf(message, "Raw x Value = %d", x);
         print_message(10, 20, message, COLOR);
         
-//        sprintf(message, "Raw y Value = %d", y);
-//        print_message(10, 30, message, COLOR);
-//        
-//        sprintf(message, "Raw z Value = %d", z);
-//        print_message(10, 40, message, COLOR);
+        sprintf(message, "Raw y Value = %d", y);
+        print_message(10, 30, message, COLOR);
+        
+        sprintf(message, "Raw z Value = %d", z);
+        print_message(10, 40, message, COLOR);
         
         LATAbits.LATA4 = !LATAbits.LATA4;       // LED blink
         

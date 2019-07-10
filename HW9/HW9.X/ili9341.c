@@ -200,7 +200,7 @@ void SPI1_init() {
   
   SPI1CON = 0; // turn off the spi module and reset it
   SPI1BUF; // clear the rx buffer by reading from it
-  SPI1BRG = 5; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
+  SPI1BRG = 3; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
   SPI1STATbits.SPIROV = 0; // clear the overflow bit
   SPI1CONbits.CKE = 1; // data changes when clock goes from hi to lo (since CKP is 0)
   SPI1CONbits.MSTEN = 1; // master operation
@@ -281,8 +281,8 @@ void print_char(unsigned short x, unsigned short y, char ch, unsigned short colo
 
 void print_message(unsigned short x, unsigned short y, char *message, unsigned short color) {
     int index = 0;
-    clear_space(x, y, x + 5*strlen(message), BACKGROUND);
-    while(message[index]) { //*(message + index)
+    clear_space(x, y, x + 120, BACKGROUND);       //x + 5*strlen(message)
+    while(message[index]) { 
         print_char(x + 5*index, y, *(message + index), color);
         index++;
     }
@@ -306,37 +306,39 @@ void draw_progress(int count, unsigned short color) {
 }
 
 void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z)  {
+    unsigned short left, right;
+    
     CSnew = 0;
     spi_io(x_ADDR);
+    //left = spi_io(0x00);
+    //right = spi_io(0x00);
     unsigned short xtemp = (spi_io(0x00)<<5) | (spi_io(0x00)>>3);
     CSnew = 1;
     
-    *x = xtemp;
+    CSnew = 0;
+    spi_io(y_ADDR);
+    //left = spi_io(0x00);
+    //right = spi_io(0x00);
+    unsigned short ytemp = (spi_io(0x00)<<5) | (spi_io(0x00)>>3);
+    CSnew = 1;
+   
+    CSnew = 0;
+    spi_io(z1_ADDR);
+    //left = spi_io(0x00);
+    //right = spi_io(0x00);
+    unsigned short z1temp = (spi_io(0x00)<<5) | (spi_io(0x00)>>3);
+    CSnew = 1;
     
-//    CSnew = 0;
-//    spi_io(y_ADDR);
-//    left = spi_io(0x00);
-//    right = spi_io(0x00);
-//    unsigned short ytemp = (left<<8) | right;
-//    CSnew = 1;
-//    
-//    *y = ytemp>>4;
-//   
-//    CSnew = 0;
-//    spi_io(z1_ADDR);
-//    left = spi_io(0x00);
-//    right = spi_io(0x00);
-//    unsigned short z1temp = (left<<8) | right;
-//    CSnew = 1;
-//    
-//    CSnew = 0;
-//    spi_io(z2_ADDR);
-//    left = spi_io(0x00);
-//    right = spi_io(0x00);
-//    unsigned short z2temp = (left<<8) | right;
-//    CSnew = 1;
-//    
-//    *z = (z1temp - z2temp + 4095)>>4;
+    CSnew = 0;
+    spi_io(z2_ADDR);
+    //left = spi_io(0x00);
+    //right = spi_io(0x00);
+    unsigned short z2temp = (spi_io(0x00)<<5) | (spi_io(0x00)>>3);
+    CSnew = 1;
+    
+    *x = xtemp;
+    *y = ytemp;
+    *z = z1temp - z2temp + 4095;
 }
 
 void draw_buttons(unsigned short color) {
