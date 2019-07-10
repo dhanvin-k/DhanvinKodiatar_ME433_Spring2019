@@ -198,7 +198,7 @@ static const char ASCII[96][5] = {
 #define z1_ADDR 0b10110001
 #define z2_ADDR 0b11000001
 #define COLOR ILI9341_GREEN
-#define BACKGROUND ILI9341_NAVY
+#define BACKGROUND ILI9341_BLACK
 
 // functions
 void LCD_init();
@@ -215,5 +215,6 @@ void print_message(unsigned short x, unsigned short y, char *message, unsigned s
 void clear_space(unsigned short x, unsigned y, unsigned short end, unsigned short color);
 void draw_progress(int count, unsigned short color);
 void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z);
+void draw_buttons(unsigned short color);
 
 #endif

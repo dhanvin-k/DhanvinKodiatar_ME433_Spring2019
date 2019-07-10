@@ -44,16 +44,19 @@ int main() {
     unsigned int z;
     
     // Print who_am_i register on the top left corner of the LCD screen at (5,5):
-    sprintf(message, "Hello World");
-    print_message(5, 5, message, COLOR);
-        
+    sprintf(message, "Hello World!");
+    print_message(10, 10, message, COLOR);
+    
+    draw_buttons(COLOR);
     
     while(1) {
         _CP0_SET_COUNT(0);
                 
         XPT2046_read(&x, &y, &z);
+        
         sprintf(message, "%d", x);
-        print_message(5, 15, message, COLOR);
+        print_message(10, 20, message, COLOR);
+        
         
         LATAbits.LATA4 = !LATAbits.LATA4;       // LED blink
         

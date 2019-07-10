@@ -281,7 +281,7 @@ void print_char(unsigned short x, unsigned short y, char ch, unsigned short colo
 
 void print_message(unsigned short x, unsigned short y, char *message, unsigned short color) {
     int index = 0;
-    clear_space(5, 13, x + 5*strlen(message), ILI9341_NAVY);
+    clear_space(x, y, x + 5*strlen(message), BACKGROUND);
     while(message[index]) { //*(message + index)
         print_char(x + 5*index, y, *(message + index), color);
         index++;
@@ -311,4 +311,21 @@ void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z)  {
     unsigned short xtemp = spi_io(0x00);
     CSnew = 1;
     *x = xtemp;
+}
+
+void draw_buttons(unsigned short color) {
+    char x, y;
+    
+    for(y = 0; y<20; y++) {
+        for(x = 0; x<20; x++) {
+            LCD_drawPixel(200+y, 100+x, color);
+            LCD_drawPixel(200+y, 100-x, color);
+            LCD_drawPixel(200-y, 100+x, color);
+            LCD_drawPixel(200-y, 100-x, color);
+            LCD_drawPixel(200+y, 220+x, color);
+            LCD_drawPixel(200+y, 220-x, color);
+            LCD_drawPixel(200-y, 220+x, color);
+            LCD_drawPixel(200-y, 220-x, color);
+        }
+    }
 }
