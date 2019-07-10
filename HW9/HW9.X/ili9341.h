@@ -215,6 +215,8 @@ void print_message(unsigned short x, unsigned short y, char *message, unsigned s
 void clear_space(unsigned short x, unsigned y, unsigned short end, unsigned short color);
 void draw_progress(int count, unsigned short color);
 void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z);
+void get_pixel(unsigned short *x_pixel, unsigned short *y_pixel, unsigned short *x, unsigned short *y, unsigned int *z, unsigned char *pressed);
 void draw_buttons(unsigned short color);
+char buttonStat(unsigned short *x, unsigned short *y, unsigned char *pressed);
 
 #endif

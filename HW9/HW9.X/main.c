@@ -39,22 +39,28 @@ int main() {
     
     LCD_clearScreen(BACKGROUND); 
     
-    unsigned char message[30];
-    unsigned short x, y;
-    unsigned int z;
+    unsigned char message[30], pressed = 0;
+    unsigned short x, y, x_pixel, y_pixel;
+    unsigned int z, count = 0;
     
     // Print who_am_i register on the top left corner of the LCD screen at (5,5):
     sprintf(message, "Hello World!");
     print_message(10, 10, message, strlen(message), COLOR);
     
     sprintf(message, "Raw x Value = ");
-    print_message(10, 20, message, strlen(message), COLOR);
+    print_message(10, 30, message, strlen(message), COLOR);
     
     sprintf(message, "Raw y Value = ");
-    print_message(10, 30, message, strlen(message), COLOR);
+    print_message(10, 40, message, strlen(message), COLOR);
         
     sprintf(message, "Raw z Value = ");
-    print_message(10, 40, message, strlen(message), COLOR);
+    print_message(10, 50, message, strlen(message), COLOR);
+    
+    sprintf(message, "Pixel x Value = ");
+    print_message(10, 70, message, strlen(message), COLOR);
+    
+    sprintf(message, "Pixel y Value = ");
+    print_message(10, 80, message, strlen(message), COLOR);
     
     draw_buttons(COLOR);
     
@@ -62,15 +68,33 @@ int main() {
         _CP0_SET_COUNT(0);
                 
         XPT2046_read(&x, &y, &z);
+        get_pixel(&x_pixel, &y_pixel, &x, &y, &z, &pressed);
         
         sprintf(message, "%d", x);
-        print_message(80, 20, message, 4, COLOR);
-        
-        sprintf(message, "%d", y);
         print_message(80, 30, message, 4, COLOR);
         
-        sprintf(message, "%d", z);
+        sprintf(message, "%d", y);
         print_message(80, 40, message, 4, COLOR);
+        
+        sprintf(message, "%d", z);
+        print_message(80, 50, message, 4, COLOR);
+        
+        sprintf(message, "%d", x_pixel);
+        print_message(80, 70, message, 4, COLOR);
+        
+        sprintf(message, "%d", y_pixel);
+        print_message(80, 80, message, 4, COLOR);
+        
+        
+        if(buttonStat(&x_pixel, &y_pixel, &pressed) == 1) {
+            count++;
+        }
+        else if(buttonStat(&x_pixel, &y_pixel, &pressed) == -1) {
+            count--;
+        }
+        
+        sprintf(message, "%d", count);
+        print_message(195, 160, message, 2, COLOR);
         
         LATAbits.LATA4 = !LATAbits.LATA4;       // LED blink
         

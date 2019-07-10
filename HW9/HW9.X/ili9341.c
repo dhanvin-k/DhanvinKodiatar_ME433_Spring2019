@@ -200,7 +200,7 @@ void SPI1_init() {
   
   SPI1CON = 0; // turn off the spi module and reset it
   SPI1BUF; // clear the rx buffer by reading from it
-  SPI1BRG = 8; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
+  SPI1BRG = 7; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
   SPI1STATbits.SPIROV = 0; // clear the overflow bit
   SPI1CONbits.CKE = 1; // data changes when clock goes from hi to lo (since CKP is 0)
   SPI1CONbits.MSTEN = 1; // master operation
@@ -341,6 +341,19 @@ void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z)  {
     *z = z1temp - z2temp + 4095;
 }
 
+void get_pixel(unsigned short *x_pixel, unsigned short *y_pixel, unsigned short *x, unsigned short *y, unsigned int *z, unsigned char *pressed) {
+    *pressed = 0;
+    if(*z > 500) {
+        *pressed = 1;
+    }
+    *x_pixel = 0;
+    *y_pixel = 0;
+    if(*pressed) {
+        *x_pixel = (*x) * (240.0/3900);
+        *y_pixel = 320-((*y) * (320.0/3900));
+    }
+}
+
 void draw_buttons(unsigned short color) {
     char x, y;
     
@@ -373,4 +386,16 @@ void draw_buttons(unsigned short color) {
             LCD_drawPixel(200-y, 220-x, BACKGROUND);
         }
     }
+}
+
+char buttonStat(unsigned short *x, unsigned short *y, unsigned char *pressed) {
+    if(pressed) {
+        if(*x>185 && *x<215 && *y>80 && *y<120) {
+            return 1;
+        }
+        else if(*x>185 && *x<215 && *y>185 && *y<215) {
+            return -1;
+        }
+    }
+    return 0;
 }
