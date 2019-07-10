@@ -45,7 +45,16 @@ int main() {
     
     // Print who_am_i register on the top left corner of the LCD screen at (5,5):
     sprintf(message, "Hello World!");
-    print_message(10, 10, message, COLOR);
+    print_message(10, 10, message, strlen(message), COLOR);
+    
+    sprintf(message, "Raw x Value = ");
+    print_message(10, 20, message, strlen(message), COLOR);
+    
+    sprintf(message, "Raw y Value = ");
+    print_message(10, 30, message, strlen(message), COLOR);
+        
+    sprintf(message, "Raw z Value = ");
+    print_message(10, 40, message, strlen(message), COLOR);
     
     draw_buttons(COLOR);
     
@@ -54,14 +63,14 @@ int main() {
                 
         XPT2046_read(&x, &y, &z);
         
-        sprintf(message, "Raw x Value = %d", x);
-        print_message(10, 20, message, COLOR);
+        sprintf(message, "%d", x);
+        print_message(80, 20, message, 4, COLOR);
         
-        sprintf(message, "Raw y Value = %d", y);
-        print_message(10, 30, message, COLOR);
+        sprintf(message, "%d", y);
+        print_message(80, 30, message, 4, COLOR);
         
-        sprintf(message, "Raw z Value = %d", z);
-        print_message(10, 40, message, COLOR);
+        sprintf(message, "%d", z);
+        print_message(80, 40, message, 4, COLOR);
         
         LATAbits.LATA4 = !LATAbits.LATA4;       // LED blink
         

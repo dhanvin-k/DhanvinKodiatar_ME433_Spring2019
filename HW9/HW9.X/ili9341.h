@@ -211,7 +211,7 @@ void LCD_setAddr(unsigned short x, unsigned short y, unsigned short w, unsigned 
 void LCD_drawPixel(unsigned short x, unsigned short y, unsigned short color);
 void LCD_clearScreen(unsigned short color);
 void print_char(unsigned short x, unsigned short y, char ch, unsigned short color);
-void print_message(unsigned short x, unsigned short y, char *message, unsigned short color);
+void print_message(unsigned short x, unsigned short y, char *message, unsigned short lenght, unsigned short color);
 void clear_space(unsigned short x, unsigned y, unsigned short end, unsigned short color);
 void draw_progress(int count, unsigned short color);
 void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z);

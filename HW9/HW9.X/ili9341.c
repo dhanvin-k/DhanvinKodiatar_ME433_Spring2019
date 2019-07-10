@@ -200,7 +200,7 @@ void SPI1_init() {
   
   SPI1CON = 0; // turn off the spi module and reset it
   SPI1BUF; // clear the rx buffer by reading from it
-  SPI1BRG = 3; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
+  SPI1BRG = 8; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
   SPI1STATbits.SPIROV = 0; // clear the overflow bit
   SPI1CONbits.CKE = 1; // data changes when clock goes from hi to lo (since CKP is 0)
   SPI1CONbits.MSTEN = 1; // master operation
@@ -279,9 +279,9 @@ void print_char(unsigned short x, unsigned short y, char ch, unsigned short colo
     }
 }
 
-void print_message(unsigned short x, unsigned short y, char *message, unsigned short color) {
+void print_message(unsigned short x, unsigned short y, char *message, unsigned short length, unsigned short color) {
     int index = 0;
-    clear_space(x, y, x + 120, BACKGROUND);       //x + 5*strlen(message)
+    clear_space(x, y, x + 5*length, BACKGROUND);       
     while(message[index]) { 
         print_char(x + 5*index, y, *(message + index), color);
         index++;
