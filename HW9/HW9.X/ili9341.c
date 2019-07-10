@@ -346,14 +346,31 @@ void draw_buttons(unsigned short color) {
     
     for(y = 0; y<20; y++) {
         for(x = 0; x<20; x++) {
-            LCD_drawPixel(200+y, 100+x, color);     // Boxes drawn at centers  (200, 100) and (200,220)
-            LCD_drawPixel(200+y, 100-x, color);     // count to be displayed at center (200,160)
-            LCD_drawPixel(200-y, 100+x, color);
-            LCD_drawPixel(200-y, 100-x, color);
-            LCD_drawPixel(200+y, 220+x, color);
-            LCD_drawPixel(200+y, 220-x, color);
-            LCD_drawPixel(200-y, 220+x, color);
-            LCD_drawPixel(200-y, 220-x, color);
+            LCD_drawPixel(200+x, 100+y, color);     // Boxes drawn at centers  (200, 100) and (200,220)
+            LCD_drawPixel(200+x, 100-y, color);     // count to be displayed at center (200,160)
+            LCD_drawPixel(200-x, 100+y, color);
+            LCD_drawPixel(200-x, 100-y, color);
+            LCD_drawPixel(200+x, 220+y, color);
+            LCD_drawPixel(200+x, 220-y, color);
+            LCD_drawPixel(200-x, 220+y, color);
+            LCD_drawPixel(200-x, 220-y, color);
+        }
+    }
+    
+    for(y = 0; y<15; y++) {
+        for(x = 0; x<2; x++) {
+            LCD_drawPixel(200+x, 100+y, BACKGROUND);     // Boxes drawn at centers  (200, 100) and (200,220)
+            LCD_drawPixel(200+x, 100-y, BACKGROUND);     // count to be displayed at center (200,160)
+            LCD_drawPixel(200-x, 100+y, BACKGROUND);
+            LCD_drawPixel(200-x, 100-y, BACKGROUND);
+            LCD_drawPixel(200+y, 100+x, BACKGROUND);     // Boxes drawn at centers  (200, 100) and (200,220)
+            LCD_drawPixel(200+y, 100-x, BACKGROUND);     // count to be displayed at center (200,160)
+            LCD_drawPixel(200-y, 100+x, BACKGROUND);
+            LCD_drawPixel(200-y, 100-x, BACKGROUND);
+            LCD_drawPixel(200+y, 220+x, BACKGROUND);     // Boxes drawn at centers  (200, 100) and (200,220)
+            LCD_drawPixel(200+y, 220-x, BACKGROUND);     // count to be displayed at center (200,160)
+            LCD_drawPixel(200-y, 220+x, BACKGROUND);
+            LCD_drawPixel(200-y, 220-x, BACKGROUND);
         }
     }
 }
