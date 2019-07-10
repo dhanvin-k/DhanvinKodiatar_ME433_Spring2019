@@ -57,6 +57,11 @@ int main() {
         sprintf(message, "%d", x);
         print_message(10, 20, message, COLOR);
         
+//        sprintf(message, "Raw y Value = %d", y);
+//        print_message(10, 30, message, COLOR);
+//        
+//        sprintf(message, "Raw z Value = %d", z);
+//        print_message(10, 40, message, COLOR);
         
         LATAbits.LATA4 = !LATAbits.LATA4;       // LED blink
         
