@@ -318,8 +318,8 @@ void draw_buttons(unsigned short color) {
     
     for(y = 0; y<20; y++) {
         for(x = 0; x<20; x++) {
-            LCD_drawPixel(200+y, 100+x, color);
-            LCD_drawPixel(200+y, 100-x, color);
+            LCD_drawPixel(200+y, 100+x, color);     // Boxes drawn at centers  (200, 100) and (200,220)
+            LCD_drawPixel(200+y, 100-x, color);     // count to be displayed at center (200,160)
             LCD_drawPixel(200-y, 100+x, color);
             LCD_drawPixel(200-y, 100-x, color);
             LCD_drawPixel(200+y, 220+x, color);
