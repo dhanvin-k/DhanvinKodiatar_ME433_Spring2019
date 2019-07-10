@@ -37,42 +37,26 @@ int main() {
     
     __builtin_enable_interrupts();
     
-    LCD_clearScreen(ILI9341_NAVY); 
+    LCD_clearScreen(BACKGROUND); 
     
-    unsigned char data[14], message[10];
+    unsigned char message[10];
+    unsigned short x, y;
+    unsigned int z;
     
     // Print who_am_i register on the top left corner of the LCD screen at (5,5):
-    sprintf(message, "WHO_AM_I = %d", getWHO_AM_I());
-    print_message(5, 5, message, ILI9341_GREEN);
-    
-    // Printing accelerometer data:
-    sprintf(message, "acc_X = %d");
-    print_message(5, 13, message, ILI9341_GREEN);
-    
-    sprintf(message, "acc_Y = %d");
-    print_message(5, 21, message, ILI9341_GREEN);
+    sprintf(message, "Hello World");
+    print_message(5, 5, message, COLOR);
+        
     
     while(1) {
         _CP0_SET_COUNT(0);
                 
-        I2C_read_multiple(SLAVE_ADDR, 0x20, data, 14);  // Multiple read of the register
-        
-        float x = getXLX(data)*SCALE_FACTOR;        // Print SCALED accelerometer x data
-        sprintf(message, "%1.2f",x);   
-        clear_space(45, 13, 70, ILI9341_NAVY);
-        print_message(45, 13, message, ILI9341_GREEN);
-        
-        float y = getXLY(data)*SCALE_FACTOR;        // Print SCALED accelerometer y data
-        sprintf(message, "%1.2f",y);
-        clear_space(45, 21, 70, ILI9341_NAVY);
-        print_message(45, 21, message, ILI9341_GREEN);
-        
-        draw_progressbars(ILI9341_BLACK);          // Draws the progress bars
-        draw_xprogress(x, ILI9341_GREEN);       // Shows x progress
-        draw_yprogress(y, ILI9341_GREEN);       // Shows y progress
+        XPT2046_read(&x, &y, &z);
+        sprintf(message, "%d", x);
+        print_message(5, 15, message, COLOR);
         
         LATAbits.LATA4 = !LATAbits.LATA4;       // LED blink
         
-        while(_CP0_GET_COUNT()<1200000) {;}     // 20 Hz delay
+        while(_CP0_GET_COUNT()<2400000) {;}
     }
 }

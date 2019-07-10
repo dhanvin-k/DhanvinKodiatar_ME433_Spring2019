@@ -1,5 +1,6 @@
 #include <xc.h>
 #include "ili9341.h"
+#include <string.h>
 
 void LCD_init() {
     int time = 0;
@@ -196,7 +197,7 @@ void SPI1_init() {
   
   SPI1CON = 0; // turn off the spi module and reset it
   SPI1BUF; // clear the rx buffer by reading from it
-  SPI1BRG = 0; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
+  SPI1BRG = 3; // baud rate to 12 MHz [SPI1BRG = (48000000/(2*desired))-1]
   SPI1STATbits.SPIROV = 0; // clear the overflow bit
   SPI1CONbits.CKE = 1; // data changes when clock goes from hi to lo (since CKP is 0)
   SPI1CONbits.MSTEN = 1; // master operation
@@ -277,7 +278,8 @@ void print_char(unsigned short x, unsigned short y, char ch, unsigned short colo
 
 void print_message(unsigned short x, unsigned short y, char *message, unsigned short color) {
     int index = 0;
-    while(*(message + index)) {
+    clear_space(5, 13, x + 5*strlen(message), ILI9341_NAVY);
+    while(message[index]) { //*(message + index)
         print_char(x + 5*index, y, *(message + index), color);
         index++;
     }
@@ -298,4 +300,12 @@ void draw_progress(int count, unsigned short color) {
     for(i = 0; i<=8; i++) {
         LCD_drawPixel(28 + count, 50 + i, color);
     }
+}
+
+void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z)  {
+    CSnew = 0;
+    spi_io(x_ADDR);
+    unsigned short xtemp = spi_io(0x00);
+    CSnew = 1;
+    *x = xtemp;
 }

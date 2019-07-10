@@ -192,6 +192,13 @@ static const char ASCII[96][5] = {
 // spi pins
 #define CS LATBbits.LATB7
 #define DC LATBbits.LATB15
+#define CSnew LATBbits.LATB9
+#define x_ADDR 0b11010001
+#define y_ADDR 0b10010001
+#define z1_ADDR 0b10110001
+#define z2_ADDR 0b11000001
+#define COLOR ILI9341_GREEN
+#define BACKGROUND ILI9341_NAVY
 
 // functions
 void LCD_init();
@@ -207,5 +214,6 @@ void print_char(unsigned short x, unsigned short y, char ch, unsigned short colo
 void print_message(unsigned short x, unsigned short y, char *message, unsigned short color);
 void clear_space(unsigned short x, unsigned y, unsigned short end, unsigned short color);
 void draw_progress(int count, unsigned short color);
+void XPT2046_read(unsigned short *x, unsigned short *y, unsigned int *z);
 
 #endif
