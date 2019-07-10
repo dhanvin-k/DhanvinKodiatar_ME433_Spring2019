@@ -27,7 +27,7 @@
 #pragma config UPLLEN = ON // USB clock on
 
 // DEVCFG3
-#pragma config USERID = 0 // some 16bit userid, doesn't matter what
+#pragma config USERID = 0x00 // some 16bit userid, doesn't matter what
 #pragma config PMDL1WAY = OFF // allow multiple reconfigurations
 #pragma config IOL1WAY = OFF // allow multiple reconfigurations
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module

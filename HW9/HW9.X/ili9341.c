@@ -191,6 +191,9 @@ void SPI1_init() {
   TRISBbits.TRISB7 = 0; // CS is B7
   CS = 1; // CS starts high
   
+  TRISBbits.TRISB9 = 0;
+  CSnew = 1;
+  
   // DC pin
   TRISBbits.TRISB15 = 0;
   DC = 1;
