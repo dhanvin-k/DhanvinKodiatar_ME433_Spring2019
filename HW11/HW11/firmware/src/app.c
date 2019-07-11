@@ -69,7 +69,7 @@ int startTime = 0; // to remember the loop time
 
 int MAFindex = 0;
 float MAFarray[MAFsize];
-float MAF, IIR, FIR, A = 0.75, B = 0.25;
+float MAF, IIR, FIR, A = 0.25, B = 0.75;
 
 // *****************************************************************************
 /* Application Data
@@ -481,7 +481,7 @@ void APP_Tasks(void) {
                 MAF = MAF + (1.0/MAFsize)*MAFarray[ind];
             }
             
-            float IIR = A*IIR + B*acc_Z;
+            IIR = A*IIR + B*acc_Z;
             
             float FIR = 0;
             
