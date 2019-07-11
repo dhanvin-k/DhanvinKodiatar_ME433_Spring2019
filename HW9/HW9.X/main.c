@@ -6,6 +6,7 @@
 #include"ili9341.h"
 #include"i2c_master_noint.h"
 #include"imu.h"
+#include"XPT2046.h"
 
 int main() {
 
@@ -56,11 +57,8 @@ int main() {
     sprintf(message, "Raw z Value = ");
     print_message(10, 50, message, strlen(message), COLOR);
     
-    sprintf(message, "Pixel x Value = ");
+    sprintf(message, "Position = ");
     print_message(10, 70, message, strlen(message), COLOR);
-    
-    sprintf(message, "Pixel y Value = ");
-    print_message(10, 80, message, strlen(message), COLOR);
     
     draw_buttons(COLOR);
     
@@ -79,12 +77,8 @@ int main() {
         sprintf(message, "%d", z);
         print_message(80, 50, message, 4, COLOR);
         
-        sprintf(message, "%d", x_pixel);
-        print_message(80, 70, message, 4, COLOR);
-        
-        sprintf(message, "%d", y_pixel);
-        print_message(80, 80, message, 4, COLOR);
-        
+        sprintf(message, "(%d, %d)", x_pixel, y_pixel);
+        print_message(65, 70, message, 10, COLOR);
         
         if(buttonStat(&x_pixel, &y_pixel, &pressed) == 1) {
             count++;

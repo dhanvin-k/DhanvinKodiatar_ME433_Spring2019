@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c i2c_master_noint.c ili9341.c imu.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c i2c_master_noint.c ili9341.c imu.c XPT2046.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/i2c_master_noint.o ${OBJECTDIR}/ili9341.o ${OBJECTDIR}/imu.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/i2c_master_noint.o.d ${OBJECTDIR}/ili9341.o.d ${OBJECTDIR}/imu.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/i2c_master_noint.o ${OBJECTDIR}/ili9341.o ${OBJECTDIR}/imu.o ${OBJECTDIR}/XPT2046.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/i2c_master_noint.o.d ${OBJECTDIR}/ili9341.o.d ${OBJECTDIR}/imu.o.d ${OBJECTDIR}/XPT2046.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/i2c_master_noint.o ${OBJECTDIR}/ili9341.o ${OBJECTDIR}/imu.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/i2c_master_noint.o ${OBJECTDIR}/ili9341.o ${OBJECTDIR}/imu.o ${OBJECTDIR}/XPT2046.o
 
 # Source Files
-SOURCEFILES=main.c i2c_master_noint.c ili9341.c imu.c
+SOURCEFILES=main.c i2c_master_noint.c ili9341.c imu.c XPT2046.c
 
 
 CFLAGS=
@@ -130,6 +130,12 @@ ${OBJECTDIR}/imu.o: imu.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/imu.o 
 	@${FIXDEPS} "${OBJECTDIR}/imu.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/imu.o.d" -o ${OBJECTDIR}/imu.o imu.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
+${OBJECTDIR}/XPT2046.o: XPT2046.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/XPT2046.o.d 
+	@${RM} ${OBJECTDIR}/XPT2046.o 
+	@${FIXDEPS} "${OBJECTDIR}/XPT2046.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/XPT2046.o.d" -o ${OBJECTDIR}/XPT2046.o XPT2046.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	
 else
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -154,6 +160,12 @@ ${OBJECTDIR}/imu.o: imu.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/imu.o.d 
 	@${RM} ${OBJECTDIR}/imu.o 
 	@${FIXDEPS} "${OBJECTDIR}/imu.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/imu.o.d" -o ${OBJECTDIR}/imu.o imu.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/XPT2046.o: XPT2046.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/XPT2046.o.d 
+	@${RM} ${OBJECTDIR}/XPT2046.o 
+	@${FIXDEPS} "${OBJECTDIR}/XPT2046.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/XPT2046.o.d" -o ${OBJECTDIR}/XPT2046.o XPT2046.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 endif
 
