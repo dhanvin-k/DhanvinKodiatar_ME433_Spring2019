@@ -43,8 +43,7 @@ int main() {
     unsigned char message[30], pressed = 0;
     unsigned short x, y, x_pixel, y_pixel;
     unsigned int z, count = 0;
-    
-    // Print who_am_i register on the top left corner of the LCD screen at (5,5):
+   
     sprintf(message, "Hello World!");
     print_message(10, 10, message, strlen(message), COLOR);
     
