@@ -66,9 +66,11 @@ int len, i = 0;
 int startTime = 0; // to remember the loop time
 
 #define MAFsize 5
+#define FIRsize 5
 
-int MAFindex = 0;
-float MAFarray[MAFsize];
+int MAFindex = 0, FIRindex = 0;
+float MAFarray[MAFsize], FIRarray[FIRsize];
+float FIRweight[FIRsize] = {-0.0105, 0.0269, 0.4836, 0.4836, 0.0269, -0.0105};
 float MAF, IIR, FIR, A = 0.25, B = 0.75;
 
 // *****************************************************************************
@@ -361,6 +363,10 @@ void APP_Initialize(void) {
         MAFarray[ind] = 0.0;
     }
     
+    for (ind = 0; ind < FIRsize; ind++) {
+        FIRarray[ind] = 0.0;
+    }
+    
     IIR = 0.0;
     
     startTime = _CP0_GET_COUNT();
@@ -473,25 +479,35 @@ void APP_Tasks(void) {
             
             I2C_read_multiple(SLAVE_ADDR, 0x20, appData.data, 14);
             float acc_Z = getXLZ(appData.data);
-            MAFarray[MAFindex] = acc_Z;
             
+            MAFarray[MAFindex] = acc_Z;     // MAF filter
             MAF = 0;
-            int ind = 0;
+            int ind;
             for (ind = 0;  ind<MAFsize; ind++) {
                 MAF = MAF + (1.0/MAFsize)*MAFarray[ind];
             }
+            MAFindex++;
             
-            IIR = A*IIR + B*acc_Z;
+            IIR = A*IIR + B*acc_Z;      // IIR filter
             
-            float FIR = 0;
+            FIRarray[FIRindex] = acc_Z;     // FIR filter
+            FIR = 0;
+            for (ind = 0; ind<FIRsize; ind++) {
+                FIR = FIR + FIRweight[ind]*FIRarray[ind];
+            }
+            FIRindex++;
             
             len = sprintf(dataOut, "%3d\t   %5.2f   %5.2f   %5.2f   %5.2f\r\n", i, acc_Z, MAF, IIR, FIR);
             i++; // increment the index so we see a change in the text
-            MAFindex++;
             
             if (MAFindex == MAFsize) {
                 MAFindex = 0;
             }
+            
+            if (FIRindex == FIRsize) {
+                FIRindex = 0;
+            }
+            
             /* IF A LETTER WAS RECEIVED, ECHO IT BACK SO THE USER CAN SEE IT */
             if (appData.isReadComplete) {
                 if (appData.readBuffer[0] == 'r') {
