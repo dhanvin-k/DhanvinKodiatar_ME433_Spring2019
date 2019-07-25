@@ -497,7 +497,8 @@ void APP_Tasks(void) {
             }
             FIRindex++;
             
-            len = sprintf(dataOut, "%3d\t   %5.2f   %5.2f   %5.2f   %5.2f\r\n", i, acc_Z, MAF, IIR, FIR);
+            //len = sprintf(dataOut, "%3d\t   %5.2f   %5.2f   %5.2f   %5.2f\r\n", i, acc_Z, MAF, IIR, FIR);
+            len = sprintf(dataOut, "%d,%1.2f,%1.2f,%1.2f,%1.2f\r\n", i, acc_Z, MAF, IIR, FIR);
             i++; // increment the index so we see a change in the text
             
             if (MAFindex == MAFsize) {
