@@ -162,7 +162,7 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
 
         final Canvas c = mSurfaceHolder.lockCanvas();
         if (c != null) {
-            //thresh = 100; // comparison value
+            //thresh = 0; // comparison value
             int[] pixels = new int[bmp.getWidth()]; // pixels[] is the RGBA data
             int startY = 0; // which row in the bitmap to analyze to read
             for (startY = 0; startY < bmp.getHeight(); startY++) {
