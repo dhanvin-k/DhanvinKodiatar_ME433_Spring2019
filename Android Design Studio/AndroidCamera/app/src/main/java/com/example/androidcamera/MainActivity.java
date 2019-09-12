@@ -15,6 +15,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.WindowManager;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
@@ -22,6 +24,7 @@ import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 
+import static android.graphics.Color.blue;
 import static android.graphics.Color.green;
 import static android.graphics.Color.red;
 import static android.graphics.Color.rgb;
@@ -35,6 +38,13 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
     private Canvas canvas = new Canvas(bmp);
     private Paint paint1 = new Paint();
     private TextView mTextView;
+    public int redThresh; // Red comparison value
+    public int blueThresh; // Blue comparison value
+
+    SeekBar myControl1;
+    SeekBar myControl2;
+    TextView myTextView1;
+    TextView myTextView2;
 
     static long prevtime = 0; // for FPS calculation
 
@@ -63,6 +73,59 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
             mTextView.setText("no camera permissions");
         }
 
+        myControl1 = (SeekBar) findViewById(R.id.seek1);
+        myControl2 = (SeekBar) findViewById(R.id.seek2);
+
+        myTextView1 = (TextView) findViewById(R.id.textView01);
+        myTextView2 = (TextView) findViewById(R.id.textView02);
+        myTextView1.setText("Enter whatever you Like!");
+        myTextView2.setText("Enter whatever you Like!");
+
+        setMyControlListener();
+    }
+
+    private void setMyControlListener() {
+        myControl1.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+            int progressChanged = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChanged = progress;
+                redThresh = (int) (progress * 2.55);
+                myTextView1.setText("RED Threshold: "+redThresh);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        myControl2.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+            int progressChanged = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChanged = progress;
+                blueThresh = (int) (progress * 2.55);
+                myTextView2.setText("BLUE Threshold: "+blueThresh);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -99,20 +162,22 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
 
         final Canvas c = mSurfaceHolder.lockCanvas();
         if (c != null) {
-            int thresh = 0; // comparison value
+            //thresh = 100; // comparison value
             int[] pixels = new int[bmp.getWidth()]; // pixels[] is the RGBA data
-            int startY = 200; // which row in the bitmap to analyze to read
-            bmp.getPixels(pixels, 0, bmp.getWidth(), 0, startY, bmp.getWidth(), 1);
+            int startY = 0; // which row in the bitmap to analyze to read
+            for (startY = 0; startY < bmp.getHeight(); startY++) {
+                bmp.getPixels(pixels, 0, bmp.getWidth(), 0, startY, bmp.getWidth(), 1);
 
-            // in the row, see if there is more green than red
-            for (int i = 0; i < bmp.getWidth(); i++) {
-                if ((green(pixels[i]) - red(pixels[i])) > thresh) {
-                    pixels[i] = rgb(0, 255, 0); // over write the pixel with pure green
+                // in the row, see if there is more green than red
+                for (int i = 0; i < bmp.getWidth(); i++) {
+                    if (((green(pixels[i]) - red(pixels[i])) > redThresh)  && (green(pixels[i]) - blue(pixels[i])) > blueThresh) {
+                        pixels[i] = rgb(0, 255, 0); // over write the pixel with pure green
+                    }
                 }
-            }
 
-            // update the row
-            bmp.setPixels(pixels, 0, bmp.getWidth(), 0, startY, bmp.getWidth(), 1);
+                // update the row
+                bmp.setPixels(pixels, 0, bmp.getWidth(), 0, startY, bmp.getWidth(), 1);
+            }
         }
 
         // draw a circle at some position
