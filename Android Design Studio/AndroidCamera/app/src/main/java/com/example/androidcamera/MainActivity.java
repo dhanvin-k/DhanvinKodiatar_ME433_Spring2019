@@ -93,7 +93,7 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChanged = progress;
                 redThresh = (int) (progress * 2.55);
-                myTextView1.setText("RED Threshold: "+redThresh);
+                myTextView1.setText("RED  Threshold: "+redThresh);
             }
 
             @Override
