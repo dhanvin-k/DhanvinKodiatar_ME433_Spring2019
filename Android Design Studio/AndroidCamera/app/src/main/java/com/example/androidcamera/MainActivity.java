@@ -174,7 +174,7 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
                         pixels[i] = rgb(0, 255, 0); // over write the pixel with pure green
                     }
                 }
-
+                
                 // update the row
                 bmp.setPixels(pixels, 0, bmp.getWidth(), 0, startY, bmp.getWidth(), 1);
             }
