@@ -6,18 +6,25 @@
 void UART_Startup() {
   // disable interrupts
   __builtin_disable_interrupts();
+  
+  // TRIS operations to make B2 & B3 make Rx and Tx pins repectively
+  TRISBbits.TRISB2 = 1;
+  TRISBbits.TRISB3 = 0;
+
 
   // configure TX & RX pins as output & input pins
-  U3STAbits.UTXEN = 1;
-  U3STAbits.URXEN = 1;
+  U1RXRbits.U1RXR = 4;
+  RPB3Rbits.RPB3R = 1;   
+//  U3STAbits.UTXEN = 1;
+//  U3STAbits.URXEN = 1;
 
   // enable the UART
-  U3MODEbits.ON = 1;
+  U1MODEbits.ON = 1;
 
   __builtin_enable_interrupts();
 }
 
-void ReadUART(char * message, int maxLength) {
+void readUART(char * message, int maxLength) {
   char data = 0;
   int complete = 0, num_bytes = 0;
   // loop until you get a '\r' or '\n'
@@ -40,7 +47,7 @@ void ReadUART(char * message, int maxLength) {
   message[num_bytes] = '\0';
 }
 
-void WriteUART(const char * string) {
+void writeUART(const char * string) {
   while (*string != '\0') {
     while (U3STAbits.UTXBF) {
       ; // wait until tx buffer isn't full
