@@ -56,7 +56,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "UART.h"
 #include "ili9341.h"
-#include "i2c_master_noint.h"
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -123,6 +122,20 @@ void APP_Initialize ( void )
     /* TODO: Initialize your application's state machine and other
      * parameters.
      */
+    
+    
+    // configure B2 & B3 as digital pins because they are set to analog by default
+    ANSELBbits.ANSB2 = 0;
+    ANSELBbits.ANSB3 = 0;
+
+    // configure TX & RX pins as output & input pins
+    U1RXRbits.U1RXR = 0b0100;
+    RPB3Rbits.RPB3R = 0b0001; 
+    
+    UART_init();
+    char message[50];
+    sprintf(message, "Hello Bluetooth!");
+    writeUART(message);
 }
 
 

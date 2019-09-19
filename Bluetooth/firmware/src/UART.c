@@ -1,18 +1,23 @@
 #include <xc.h>
 #include "UART.h"
 
-void UART_Startup() {
+void UART_init() {
   // disable interrupts
   __builtin_disable_interrupts();
   
   // TRIS operations to make B2 & B3 make Rx and Tx pins repectively
-  TRISBbits.TRISB2 = 1;
-  TRISBbits.TRISB3 = 0;
+//  TRISBbits.TRISB2 = 1;
+//  TRISBbits.TRISB3 = 0;
 
+  
+  U1MODEbits.BRGH = 0; // set baud to NU32_DESIRED_BAUD
+  U1BRG = ((PIC_FREQ / BAUD_RATE) / 16) - 1;
 
-  // configure TX & RX pins as output & input pins
-  U1RXRbits.U1RXR = 4;
-  RPB3Rbits.RPB3R = 1;   
+  // 8 bit, no parity bit, and 1 stop bit (8N1 setup)
+  U1MODEbits.PDSEL = 0;
+  U1MODEbits.STSEL = 0;
+
+  // configure TX & RX pins as output & input pins   
   U1STAbits.UTXEN = 1;
   U1STAbits.URXEN = 1;
 
