@@ -123,7 +123,6 @@ void APP_Initialize ( void )
      * parameters.
      */
     
-    
     // configure B2 & B3 as digital pins because they are set to analog by default
     ANSELBbits.ANSB2 = 0;
     ANSELBbits.ANSB3 = 0;
@@ -132,10 +131,10 @@ void APP_Initialize ( void )
     U1RXRbits.U1RXR = 0b0100;
     RPB3Rbits.RPB3R = 0b0001; 
     
+    SPI1_init();
+    LCD_init();
     UART_init();
-    char message[50];
-    sprintf(message, "Hello Bluetooth!");
-    writeUART(message);
+    LCD_clearScreen(BACKGROUND); 
 }
 
 
@@ -169,7 +168,9 @@ void APP_Tasks ( void )
 
         case APP_STATE_SERVICE_TASKS:
         {
-        
+            char message[10];
+            readUART(message, 50);
+            print_message(10, 10, message, strlen(message), COLOR);
             break;
         }
 

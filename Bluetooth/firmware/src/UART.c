@@ -5,10 +5,7 @@ void UART_init() {
   // disable interrupts
   __builtin_disable_interrupts();
   
-  // TRIS operations to make B2 & B3 make Rx and Tx pins repectively
-//  TRISBbits.TRISB2 = 1;
-//  TRISBbits.TRISB3 = 0;
-
+    __builtin_mtc0(_CP0_CONFIG, _CP0_CONFIG_SELECT, 0xa4210583); 
   
   U1MODEbits.BRGH = 0; // set baud to NU32_DESIRED_BAUD
   U1BRG = ((PIC_FREQ / BAUD_RATE) / 16) - 1;
@@ -21,6 +18,9 @@ void UART_init() {
   U1STAbits.UTXEN = 1;
   U1STAbits.URXEN = 1;
 
+  // configure hardware flow control using RTS and CTS
+  U1MODEbits.UEN = 0;
+  
   // enable the UART
   U1MODEbits.ON = 1;
 
