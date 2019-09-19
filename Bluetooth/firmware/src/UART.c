@@ -1,7 +1,7 @@
 #include <xc.h>
 #include "UART.h"
 
-#define BAUD_RATE 960000    // Baudrate
+#define BAUD_RATE 96000    // Baudrate
 
 void UART_Startup() {
   // disable interrupts
