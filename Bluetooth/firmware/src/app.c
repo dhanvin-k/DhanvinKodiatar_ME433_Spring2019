@@ -54,7 +54,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
-
+#include "UART.h"
+#include "ili9341.h"
+#include "i2c_master_noint.h"
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions

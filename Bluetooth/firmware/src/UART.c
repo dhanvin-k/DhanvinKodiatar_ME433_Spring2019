@@ -1,8 +1,6 @@
 #include <xc.h>
 #include "UART.h"
 
-#define BAUD_RATE 96000    // Baudrate
-
 void UART_Startup() {
   // disable interrupts
   __builtin_disable_interrupts();
@@ -15,8 +13,8 @@ void UART_Startup() {
   // configure TX & RX pins as output & input pins
   U1RXRbits.U1RXR = 4;
   RPB3Rbits.RPB3R = 1;   
-//  U3STAbits.UTXEN = 1;
-//  U3STAbits.URXEN = 1;
+  U1STAbits.UTXEN = 1;
+  U1STAbits.URXEN = 1;
 
   // enable the UART
   U1MODEbits.ON = 1;
@@ -29,8 +27,8 @@ void readUART(char * message, int maxLength) {
   int complete = 0, num_bytes = 0;
   // loop until you get a '\r' or '\n'
   while (!complete) {
-    if (U3STAbits.URXDA) { // if data is available
-      data = U3RXREG;      // read the data
+    if (U1STAbits.URXDA) { // if data is available
+      data = U1RXREG;      // read the data
       if ((data == '\n') || (data == '\r')) {
         complete = 1;
       } else {
@@ -49,10 +47,10 @@ void readUART(char * message, int maxLength) {
 
 void writeUART(const char * string) {
   while (*string != '\0') {
-    while (U3STAbits.UTXBF) {
+    while (U1STAbits.UTXBF) {
       ; // wait until tx buffer isn't full
     }
-    U3TXREG = *string;
+    U1TXREG = *string;
     ++string;
   }
 }

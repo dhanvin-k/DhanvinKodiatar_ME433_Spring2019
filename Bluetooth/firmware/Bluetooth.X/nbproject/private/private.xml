@@ -5,10 +5,7 @@
         <group>
             <file>file:/Users/dhanvin/Documents/GitHub/DhanvinKodiatar_ME433_Spring2019/Bluetooth/firmware/src/app.c</file>
             <file>file:/Users/dhanvin/Documents/GitHub/DhanvinKodiatar_ME433_Spring2019/Bluetooth/firmware/src/UART.h</file>
-            <file>file:/Users/dhanvin/Documents/GitHub/DhanvinKodiatar_ME433_Spring2019/Bluetooth/firmware/src/HC08.c</file>
             <file>file:/Users/dhanvin/Documents/GitHub/DhanvinKodiatar_ME433_Spring2019/Bluetooth/firmware/src/UART.c</file>
-            <file>file:/Users/dhanvin/Documents/GitHub/DhanvinKodiatar_ME433_Spring2019/Bluetooth/firmware/src/HC08.h</file>
-            <file>file:/Users/dhanvin/Documents/GitHub/DhanvinKodiatar_ME433_Spring2019/Bluetooth/firmware/src/ili9341.c</file>
         </group>
     </open-files>
 </project-private>
