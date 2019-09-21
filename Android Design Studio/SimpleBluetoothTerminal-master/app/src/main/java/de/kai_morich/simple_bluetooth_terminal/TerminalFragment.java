@@ -151,7 +151,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         setMyControlListener();
 
-        receiveText = view.findViewById(R.id.receive_text);                          // TextView performance decreases with number of spans
+        receiveText = view.findViewById(R.id.textView03);                          // TextView performance decreases with number of spans
         receiveText.setTextColor(getResources().getColor(R.color.colorRecieveText)); // set as default color to reduce number of spans
         receiveText.setMovementMethod(ScrollingMovementMethod.getInstance());
         TextView sendText = view.findViewById(R.id.send_text);

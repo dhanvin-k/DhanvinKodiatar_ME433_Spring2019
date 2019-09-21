@@ -282,7 +282,7 @@ void print_char(unsigned short x, unsigned short y, char ch, unsigned short colo
 
 void print_message(unsigned short x, unsigned short y, char *message, unsigned short length, unsigned short color) {
     int index = 0;
-    clear_space(x, y, x + 10*length, BACKGROUND);       
+    clear_space(x, y, x + 5*length, BACKGROUND);       
     while(message[index]) { 
         print_char(x + 5*index, y, *(message + index), color);
         index++;

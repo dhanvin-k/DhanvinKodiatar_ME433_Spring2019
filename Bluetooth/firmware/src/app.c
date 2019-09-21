@@ -171,6 +171,7 @@ void APP_Tasks ( void )
             char message[10];
             readUART(message, 50);
             print_message(10, 10, message, strlen(message), COLOR);
+            writeUART(message);
             break;
         }
 
