@@ -1,0 +1,3 @@
+I have used Simple Bluetooth App created by kai-morich: https://github.com/kai-morich/SimpleBluetoothTerminal and edited it. The repo contains the license too.
+
+Thank you.
