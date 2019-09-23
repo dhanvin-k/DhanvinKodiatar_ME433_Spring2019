@@ -25,7 +25,6 @@
         <itemPath>../src/i2c_master_noint.h</itemPath>
         <itemPath>../src/ili9341.h</itemPath>
         <itemPath>../src/XPT2046.h</itemPath>
-        <itemPath>../src/HC08.h</itemPath>
         <itemPath>../src/UART.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
@@ -105,7 +104,6 @@
         <itemPath>../src/i2c_master_noint.c</itemPath>
         <itemPath>../src/ili9341.c</itemPath>
         <itemPath>../src/XPT2046.c</itemPath>
-        <itemPath>../src/HC08.c</itemPath>
         <itemPath>../src/UART.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
@@ -140,7 +138,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>snap</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>1.42</languageToolchainVersion>
+        <languageToolchainVersion>2.15</languageToolchainVersion>
         <platform>4</platform>
       </toolsSet>
       <packs>
