@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Config-Bit Settings for PIC32MX250F128B</title>
+</head>
+<body bgcolor="#FFFFE0" style="font-family: sans-serif">
+<p>[ <a href="../XC32MasterIndex.htm">Documentation Index</a> | <a href="../PIC32ConfigSet.html">Device index</a> ]</p>
+<h1>Configuration-Bit Settings for PIC32MX250F128B</h1><p>(Data Sheet # <a href="http://www.microchip.com/wwwproducts/Devices.aspx?Product=PIC32MX250F128B&amp;ds=1" target="Datasheet">DS-60001168</a>)</p>
+<p>Usage:<br><strong>#pragma config</strong> <em>SETTING</em> = <em>VALUE</em><br>
+</p>
+<table frame=box rules=cols summary='' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>USERID</th><th></th></tr><tr><td>USERID = 00000000</td><td><font size="2">
+Range is from 0 to 0xffff
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Peripheral Module Disable Configuration' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>PMDL1WAY</th><th>Peripheral Module Disable Configuration</th></tr><tr><td>PMDL1WAY = ON</td><td><font size="2">
+Allow only one reconfiguration
+</font></td></tr>
+<tr><td>PMDL1WAY = OFF</td><td><font size="2">
+Allow multiple reconfigurations
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Peripheral Pin Select Configuration' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>IOL1WAY</th><th>Peripheral Pin Select Configuration</th></tr><tr><td>IOL1WAY = ON</td><td><font size="2">
+Allow only one reconfiguration
+</font></td></tr>
+<tr><td>IOL1WAY = OFF</td><td><font size="2">
+Allow multiple reconfigurations
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='USB USID Selection' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FUSBIDIO</th><th>USB USID Selection</th></tr><tr><td>FUSBIDIO = OFF</td><td><font size="2">
+Controlled by Port Function
+</font></td></tr>
+<tr><td>FUSBIDIO = ON</td><td><font size="2">
+Controlled by the USB Module
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='USB VBUS ON Selection' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FVBUSONIO</th><th>USB VBUS ON Selection</th></tr><tr><td>FVBUSONIO = OFF</td><td><font size="2">
+Controlled by Port Function
+</font></td></tr>
+<tr><td>FVBUSONIO = ON</td><td><font size="2">
+Controlled by USB Module
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='PLL Input Divider' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FPLLIDIV</th><th>PLL Input Divider</th></tr><tr><td>FPLLIDIV = DIV_1</td><td><font size="2">
+1x Divider
+</font></td></tr>
+<tr><td>FPLLIDIV = DIV_2</td><td><font size="2">
+2x Divider
+</font></td></tr>
+<tr><td>FPLLIDIV = DIV_3</td><td><font size="2">
+3x Divider
+</font></td></tr>
+<tr><td>FPLLIDIV = DIV_4</td><td><font size="2">
+4x Divider
+</font></td></tr>
+<tr><td>FPLLIDIV = DIV_5</td><td><font size="2">
+5x Divider
+</font></td></tr>
+<tr><td>FPLLIDIV = DIV_6</td><td><font size="2">
+6x Divider
+</font></td></tr>
+<tr><td>FPLLIDIV = DIV_10</td><td><font size="2">
+10x Divider
+</font></td></tr>
+<tr><td>FPLLIDIV = DIV_12</td><td><font size="2">
+12x Divider
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='PLL Multiplier' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FPLLMUL</th><th>PLL Multiplier</th></tr><tr><td>FPLLMUL = MUL_15</td><td><font size="2">
+15x Multiplier
+</font></td></tr>
+<tr><td>FPLLMUL = MUL_16</td><td><font size="2">
+16x Multiplier
+</font></td></tr>
+<tr><td>FPLLMUL = MUL_17</td><td><font size="2">
+17x Multiplier
+</font></td></tr>
+<tr><td>FPLLMUL = MUL_18</td><td><font size="2">
+18x Multiplier
+</font></td></tr>
+<tr><td>FPLLMUL = MUL_19</td><td><font size="2">
+19x Multiplier
+</font></td></tr>
+<tr><td>FPLLMUL = MUL_20</td><td><font size="2">
+20x Multiplier
+</font></td></tr>
+<tr><td>FPLLMUL = MUL_21</td><td><font size="2">
+21x Multiplier
+</font></td></tr>
+<tr><td>FPLLMUL = MUL_24</td><td><font size="2">
+24x Multiplier
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='USB PLL Input Divider' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>UPLLIDIV</th><th>USB PLL Input Divider</th></tr><tr><td>UPLLIDIV = DIV_1</td><td><font size="2">
+1x Divider
+</font></td></tr>
+<tr><td>UPLLIDIV = DIV_2</td><td><font size="2">
+2x Divider
+</font></td></tr>
+<tr><td>UPLLIDIV = DIV_3</td><td><font size="2">
+3x Divider
+</font></td></tr>
+<tr><td>UPLLIDIV = DIV_4</td><td><font size="2">
+4x Divider
+</font></td></tr>
+<tr><td>UPLLIDIV = DIV_5</td><td><font size="2">
+5x Divider
+</font></td></tr>
+<tr><td>UPLLIDIV = DIV_6</td><td><font size="2">
+6x Divider
+</font></td></tr>
+<tr><td>UPLLIDIV = DIV_10</td><td><font size="2">
+10x Divider
+</font></td></tr>
+<tr><td>UPLLIDIV = DIV_12</td><td><font size="2">
+12x Divider
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='USB PLL Enable' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>UPLLEN</th><th>USB PLL Enable</th></tr><tr><td>UPLLEN = ON</td><td><font size="2">
+Enabled
+</font></td></tr>
+<tr><td>UPLLEN = OFF</td><td><font size="2">
+Disabled and Bypassed
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='System PLL Output Clock Divider' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FPLLODIV</th><th>System PLL Output Clock Divider</th></tr><tr><td>FPLLODIV = DIV_1</td><td><font size="2">
+PLL Divide by 1
+</font></td></tr>
+<tr><td>FPLLODIV = DIV_2</td><td><font size="2">
+PLL Divide by 2
+</font></td></tr>
+<tr><td>FPLLODIV = DIV_4</td><td><font size="2">
+PLL Divide by 4
+</font></td></tr>
+<tr><td>FPLLODIV = DIV_8</td><td><font size="2">
+PLL Divide by 8
+</font></td></tr>
+<tr><td>FPLLODIV = DIV_16</td><td><font size="2">
+PLL Divide by 16
+</font></td></tr>
+<tr><td>FPLLODIV = DIV_32</td><td><font size="2">
+PLL Divide by 32
+</font></td></tr>
+<tr><td>FPLLODIV = DIV_64</td><td><font size="2">
+PLL Divide by 64
+</font></td></tr>
+<tr><td>FPLLODIV = DIV_256</td><td><font size="2">
+PLL Divide by 256
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Oscillator Selection Bits' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FNOSC</th><th>Oscillator Selection Bits</th></tr><tr><td>FNOSC = FRC</td><td><font size="2">
+Fast RC Osc (FRC)
+</font></td></tr>
+<tr><td>FNOSC = FRCPLL</td><td><font size="2">
+Fast RC Osc with PLL
+</font></td></tr>
+<tr><td>FNOSC = PRI</td><td><font size="2">
+Primary Osc (XT,HS,EC)
+</font></td></tr>
+<tr><td>FNOSC = PRIPLL</td><td><font size="2">
+Primary Osc w/PLL (XT+,HS+,EC+PLL)
+</font></td></tr>
+<tr><td>FNOSC = SOSC</td><td><font size="2">
+Low Power Secondary Osc (SOSC)
+</font></td></tr>
+<tr><td>FNOSC = LPRC</td><td><font size="2">
+Low Power RC Osc (LPRC)
+</font></td></tr>
+<tr><td>FNOSC = FRCDIV16</td><td><font size="2">
+Fast RC Osc w/Div-by-16 (FRC/16)
+</font></td></tr>
+<tr><td>FNOSC = FRCDIV</td><td><font size="2">
+Fast RC Osc w/Div-by-N (FRCDIV)
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Secondary Oscillator Enable' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FSOSCEN</th><th>Secondary Oscillator Enable</th></tr><tr><td>FSOSCEN = OFF</td><td><font size="2">
+Disabled
+</font></td></tr>
+<tr><td>FSOSCEN = ON</td><td><font size="2">
+Enabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Internal/External Switch Over' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>IESO</th><th>Internal/External Switch Over</th></tr><tr><td>IESO = OFF</td><td><font size="2">
+Disabled
+</font></td></tr>
+<tr><td>IESO = ON</td><td><font size="2">
+Enabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Primary Oscillator Configuration' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>POSCMOD</th><th>Primary Oscillator Configuration</th></tr><tr><td>POSCMOD = EC</td><td><font size="2">
+External clock mode
+</font></td></tr>
+<tr><td>POSCMOD = XT</td><td><font size="2">
+XT osc mode
+</font></td></tr>
+<tr><td>POSCMOD = HS</td><td><font size="2">
+HS osc mode
+</font></td></tr>
+<tr><td>POSCMOD = OFF</td><td><font size="2">
+Primary osc disabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='CLKO Output Signal Active on the OSCO Pin' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>OSCIOFNC</th><th>CLKO Output Signal Active on the OSCO Pin</th></tr><tr><td>OSCIOFNC = OFF</td><td><font size="2">
+Disabled
+</font></td></tr>
+<tr><td>OSCIOFNC = ON</td><td><font size="2">
+Enabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Peripheral Clock Divisor' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FPBDIV</th><th>Peripheral Clock Divisor</th></tr><tr><td>FPBDIV = DIV_1</td><td><font size="2">
+Pb_Clk is Sys_Clk/1
+</font></td></tr>
+<tr><td>FPBDIV = DIV_2</td><td><font size="2">
+Pb_Clk is Sys_Clk/2
+</font></td></tr>
+<tr><td>FPBDIV = DIV_4</td><td><font size="2">
+Pb_Clk is Sys_Clk/4
+</font></td></tr>
+<tr><td>FPBDIV = DIV_8</td><td><font size="2">
+Pb_Clk is Sys_Clk/8
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Clock Switching and Monitor Selection' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FCKSM</th><th>Clock Switching and Monitor Selection</th></tr><tr><td>FCKSM = CSECME</td><td><font size="2">
+Clock Switch Enable, FSCM Enabled
+</font></td></tr>
+<tr><td>FCKSM = CSECMD</td><td><font size="2">
+Clock Switch Enable, FSCM Disabled
+</font></td></tr>
+<tr><td>FCKSM = CSDCMD</td><td><font size="2">
+Clock Switch Disable, FSCM Disabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Watchdog Timer Postscaler' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>WDTPS</th><th>Watchdog Timer Postscaler</th></tr><tr><td>WDTPS = PS1</td><td><font size="2">
+1:1
+</font></td></tr>
+<tr><td>WDTPS = PS2</td><td><font size="2">
+1:2
+</font></td></tr>
+<tr><td>WDTPS = PS4</td><td><font size="2">
+1:4
+</font></td></tr>
+<tr><td>WDTPS = PS8</td><td><font size="2">
+1:8
+</font></td></tr>
+<tr><td>WDTPS = PS16</td><td><font size="2">
+1:16
+</font></td></tr>
+<tr><td>WDTPS = PS32</td><td><font size="2">
+1:32
+</font></td></tr>
+<tr><td>WDTPS = PS64</td><td><font size="2">
+1:64
+</font></td></tr>
+<tr><td>WDTPS = PS128</td><td><font size="2">
+1:128
+</font></td></tr>
+<tr><td>WDTPS = PS256</td><td><font size="2">
+1:256
+</font></td></tr>
+<tr><td>WDTPS = PS512</td><td><font size="2">
+1:512
+</font></td></tr>
+<tr><td>WDTPS = PS1024</td><td><font size="2">
+1:1024
+</font></td></tr>
+<tr><td>WDTPS = PS2048</td><td><font size="2">
+1:2048
+</font></td></tr>
+<tr><td>WDTPS = PS4096</td><td><font size="2">
+1:4096
+</font></td></tr>
+<tr><td>WDTPS = PS8192</td><td><font size="2">
+1:8192
+</font></td></tr>
+<tr><td>WDTPS = PS16384</td><td><font size="2">
+1:16384
+</font></td></tr>
+<tr><td>WDTPS = PS32768</td><td><font size="2">
+1:32768
+</font></td></tr>
+<tr><td>WDTPS = PS65536</td><td><font size="2">
+1:65536
+</font></td></tr>
+<tr><td>WDTPS = PS131072</td><td><font size="2">
+1:131072
+</font></td></tr>
+<tr><td>WDTPS = PS262144</td><td><font size="2">
+1:262144
+</font></td></tr>
+<tr><td>WDTPS = PS524288</td><td><font size="2">
+1:524288
+</font></td></tr>
+<tr><td>WDTPS = PS1048576</td><td><font size="2">
+1:1048576
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Watchdog Timer Window Enable' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>WINDIS</th><th>Watchdog Timer Window Enable</th></tr><tr><td>WINDIS = ON</td><td><font size="2">
+Watchdog Timer is in Window Mode
+</font></td></tr>
+<tr><td>WINDIS = OFF</td><td><font size="2">
+Watchdog Timer is in Non-Window Mode
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Watchdog Timer Enable' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FWDTEN</th><th>Watchdog Timer Enable</th></tr><tr><td>FWDTEN = OFF</td><td><font size="2">
+WDT Disabled (SWDTEN Bit Controls)
+</font></td></tr>
+<tr><td>FWDTEN = ON</td><td><font size="2">
+WDT Enabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Watchdog Timer Window Size' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>FWDTWINSZ</th><th>Watchdog Timer Window Size</th></tr><tr><td>FWDTWINSZ = WINSZ_75</td><td><font size="2">
+Window Size is 75%
+</font></td></tr>
+<tr><td>FWDTWINSZ = WINSZ_50</td><td><font size="2">
+Window Size is 50%
+</font></td></tr>
+<tr><td>FWDTWINSZ = WINSZ_37</td><td><font size="2">
+Window Size is 37.5%
+</font></td></tr>
+<tr><td>FWDTWINSZ = WINSZ_25</td><td><font size="2">
+Window Size is 25%
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Background Debugger Enable' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>DEBUG</th><th>Background Debugger Enable</th></tr><tr><td>DEBUG = ON</td><td><font size="2">
+Debugger is Enabled
+</font></td></tr>
+<tr><td>DEBUG = OFF</td><td><font size="2">
+Debugger is Disabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='JTAG Enable' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>JTAGEN</th><th>JTAG Enable</th></tr><tr><td>JTAGEN = ON</td><td><font size="2">
+JTAG Port Enabled
+</font></td></tr>
+<tr><td>JTAGEN = OFF</td><td><font size="2">
+JTAG Disabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='ICE/ICD Comm Channel Select' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>ICESEL</th><th>ICE/ICD Comm Channel Select</th></tr><tr><td>ICESEL = ICS_PGx1</td><td><font size="2">
+Communicate on PGEC1/PGED1
+</font></td></tr>
+<tr><td>ICESEL = ICS_PGx2</td><td><font size="2">
+Communicate on PGEC2/PGED2
+</font></td></tr>
+<tr><td>ICESEL = ICS_PGx3</td><td><font size="2">
+Communicate on PGEC3/PGED3
+</font></td></tr>
+<tr><td>ICESEL = RESERVED</td><td><font size="2">
+Reserved
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Program Flash Write Protect' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>PWP</th><th>Program Flash Write Protect</th></tr><tr><td>PWP = OFF</td><td><font size="2">
+Disable
+</font></td></tr>
+<tr><td>PWP = PWP1K</td><td><font size="2">
+First 1K
+</font></td></tr>
+<tr><td>PWP = PWP2K</td><td><font size="2">
+First 2K
+</font></td></tr>
+<tr><td>PWP = PWP3K</td><td><font size="2">
+First 3K
+</font></td></tr>
+<tr><td>PWP = PWP4K</td><td><font size="2">
+First 4K
+</font></td></tr>
+<tr><td>PWP = PWP5K</td><td><font size="2">
+First 5K
+</font></td></tr>
+<tr><td>PWP = PWP6K</td><td><font size="2">
+First 6K
+</font></td></tr>
+<tr><td>PWP = PWP7K</td><td><font size="2">
+First 7K
+</font></td></tr>
+<tr><td>PWP = PWP8K</td><td><font size="2">
+First 8K
+</font></td></tr>
+<tr><td>PWP = PWP9K</td><td><font size="2">
+First 9K
+</font></td></tr>
+<tr><td>PWP = PWP10K</td><td><font size="2">
+First 10K
+</font></td></tr>
+<tr><td>PWP = PWP11K</td><td><font size="2">
+First 11K
+</font></td></tr>
+<tr><td>PWP = PWP12K</td><td><font size="2">
+First 12K
+</font></td></tr>
+<tr><td>PWP = PWP13K</td><td><font size="2">
+First 13K
+</font></td></tr>
+<tr><td>PWP = PWP14K</td><td><font size="2">
+First 14K
+</font></td></tr>
+<tr><td>PWP = PWP15K</td><td><font size="2">
+First 15K
+</font></td></tr>
+<tr><td>PWP = PWP16K</td><td><font size="2">
+First 16K
+</font></td></tr>
+<tr><td>PWP = PWP17K</td><td><font size="2">
+First 17K
+</font></td></tr>
+<tr><td>PWP = PWP18K</td><td><font size="2">
+First 18K
+</font></td></tr>
+<tr><td>PWP = PWP19K</td><td><font size="2">
+First 19K
+</font></td></tr>
+<tr><td>PWP = PWP20K</td><td><font size="2">
+First 20K
+</font></td></tr>
+<tr><td>PWP = PWP21K</td><td><font size="2">
+First 21K
+</font></td></tr>
+<tr><td>PWP = PWP22K</td><td><font size="2">
+First 22K
+</font></td></tr>
+<tr><td>PWP = PWP23K</td><td><font size="2">
+First 23K
+</font></td></tr>
+<tr><td>PWP = PWP24K</td><td><font size="2">
+First 24K
+</font></td></tr>
+<tr><td>PWP = PWP25K</td><td><font size="2">
+First 25K
+</font></td></tr>
+<tr><td>PWP = PWP26K</td><td><font size="2">
+First 26K
+</font></td></tr>
+<tr><td>PWP = PWP27K</td><td><font size="2">
+First 27K
+</font></td></tr>
+<tr><td>PWP = PWP28K</td><td><font size="2">
+First 28K
+</font></td></tr>
+<tr><td>PWP = PWP29K</td><td><font size="2">
+First 29K
+</font></td></tr>
+<tr><td>PWP = PWP30K</td><td><font size="2">
+First 30K
+</font></td></tr>
+<tr><td>PWP = PWP31K</td><td><font size="2">
+First 31K
+</font></td></tr>
+<tr><td>PWP = PWP32K</td><td><font size="2">
+First 32K
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Boot Flash Write Protect bit' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>BWP</th><th>Boot Flash Write Protect bit</th></tr><tr><td>BWP = ON</td><td><font size="2">
+Protection Enabled
+</font></td></tr>
+<tr><td>BWP = OFF</td><td><font size="2">
+Protection Disabled
+</font></td></tr>
+</table>
+
+<table frame=box rules=cols summary='Code Protect' style='margin:10px;' cellpadding=3><tr style="border: 2px solid;"><th>CP</th><th>Code Protect</th></tr><tr><td>CP = ON</td><td><font size="2">
+Protection Enabled
+</font></td></tr>
+<tr><td>CP = OFF</td><td><font size="2">
+Protection Disabled
+</font></td></tr>
+</table>
+
